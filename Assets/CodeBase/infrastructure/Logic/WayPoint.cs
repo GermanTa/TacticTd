@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class WayPoint : MonoBehaviour
 {
-    private Vector2 _vectro2Position;
-    public Vector2 Vectro2LocalPositionWayPoint
+    private Vector2 _vector2Position;
+    public Vector2 Vector2LocalPositionWayPoint
     {
-        get { return _vectro2Position; }
+        get { return _vector2Position; }
     }
     private void Awake()
     {
-        _vectro2Position = new Vector2(transform.localPosition.x, transform.localPosition.z); 
+        _vector2Position = new Vector2(transform.localPosition.x, transform.localPosition.z); 
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 namespace CodeBase.StaticData
 {
   [CreateAssetMenu(fileName = "MonsterData", menuName = "StaticData/Monster")]
-  public class MonsterStaticData : ScriptableObject
-  {
+  public class MonsterStaticData : ScriptableObject {
     
+    public string prefabName;
     public GameObject Prefab;
     public MonsterTypeId MonsterTypeId;
     

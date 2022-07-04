@@ -18,7 +18,8 @@ namespace CodeBase.infrastructure.States
             get { return _coroutineRunner; }
         }
 
-        public GameStateMachine(SceneLoader sceneLoader,AllServices services, ICoroutineRunner coroutineRunner)
+        public GameStateMachine(SceneLoader sceneLoader, AllServices services, ICoroutineRunner coroutineRunner,
+            DistanceControlService distanceControlService)
         {
             _coroutineRunner = coroutineRunner;
             _states = new Dictionary<Type, IExitableState>()
@@ -31,6 +32,8 @@ namespace CodeBase.infrastructure.States
                 services.Single<ISpawnerService>()
                 ),
             };
+            
+            services.RegisterSingle(distanceControlService);
         }
         
         public void Enter<TState>() where TState : class, IState

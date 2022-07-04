@@ -4,6 +4,7 @@ using CodeBase.StaticData;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace CodeBase.Services.SpawnerService
@@ -14,10 +15,13 @@ namespace CodeBase.Services.SpawnerService
         private readonly IStaticDataService _staticDataService;
         private readonly IFactoryField _factoryField;
         private LevelStaticData _wave;
-        private LinkedList<GameObject> _linkedMinicStaticData = new LinkedList<GameObject>();
-        List<GameObject> _listMobsGO = new List<GameObject>();
+
+        private Dictionary<string, GameObject> _mobs = new();
+        //List<GameObject>  = new List<GameObject>();
 
         public event Action<int> ChangedListMobsGO;
+        public List<GameObject> GetAllMobs() => _mobs.Values.ToList();
+
         public SpawnerService(IStaticDataService staticDataService, IFactoryField factoryField, ICoroutineRunner coroutineRunner)
         {
             _staticDataService = staticDataService;
@@ -25,11 +29,9 @@ namespace CodeBase.Services.SpawnerService
             _coroutineRunner = coroutineRunner;
         }
 
-        public void DeleteMobFromList(int index)
+        public void DeleteMobFromList(string id)
         {
-            if (index > _listMobsGO.Count) return;
-            _listMobsGO.RemoveAt(index);
-            ChangedListMobsGO?.Invoke(index);
+            _mobs.Remove(id);
         }
 
         public void SpawnSelectedMinics(SpawnPointMinic[] spawnPoinst, MinicId[] minicsId)
@@ -42,44 +44,35 @@ namespace CodeBase.Services.SpawnerService
             }
         }
 
-        public void StartSapwnWaveCoroutine(LevelWaveId waveId, SpawnPoint spawnPoint)
+        public void SpawnWave(LevelWaveId waveId, SpawnPoint spawnPoint)
         {
             _wave = _staticDataService.ForWave(waveId);
             for (int i = 0; i < _wave.MonsterStaticData.Count; i++)
             {
                 var item = _wave.MonsterStaticData[i];
-                var mobGO = _factoryField.CreateMob(spawnPoint, item.Prefab, _linkedMinicStaticData, _listMobsGO);
+                var mobGO = _factoryField.CreateMob(spawnPoint, item.Prefab); //item.prefabName
+                //Resources.LoadAll<Mob>("Mobs");
+
                 Mob mob = mobGO.GetComponent<Mob>();
-                mob.MovingToWaypoints.Index = i;
-                mob.MovingToWaypoints.Construct(this);
+                mob.MovingToWaypoints.Construct(_factoryField.Waypoints);
                 mobGO.SetActive(false);
-
-                _linkedMinicStaticData.AddLast(mobGO);
-                _listMobsGO.Add(mobGO);
+                var id = Guid.NewGuid().ToString();
+                mob.MovingToWaypoints.id = id;
+                _mobs.Add(id, mobGO);
             }
-           
 
-  
-            _coroutineRunner.StartCoroutine(SapwnWave(spawnPoint));
+            _coroutineRunner.StartCoroutine(SpawnWaveCoroutine());
         }
 
      
-        IEnumerator SapwnWave(SpawnPoint spawnPoint)
-        {
-            var current = _linkedMinicStaticData.First;
-            var i = 0;
-           
-
-            while (current.Next != null)
-            {
-                current.Value.SetActive(true);
-                current = current.Next;
-                i++;
-                yield return new WaitForSeconds(1.5f);
+        IEnumerator SpawnWaveCoroutine() {
+            
+            var spawnWaveCoroutine = new WaitForSeconds(1.5f);
+            
+            foreach (var mob in _mobs.Values) {
+                mob.SetActive(true);
+                yield return spawnWaveCoroutine;
             }
-
-            _linkedMinicStaticData.Last.Value.SetActive(true);
-
 
         }
     }

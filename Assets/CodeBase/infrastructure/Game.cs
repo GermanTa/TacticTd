@@ -7,9 +7,9 @@ namespace CodeBase.Infrastructure
     public class Game
     {
         public GameStateMachine StateMachine;
-        public Game(ICoroutineRunner coroutineRunner)
+        public Game(ICoroutineRunner coroutineRunner, DistanceControlService distanceControlService)
         {
-            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), AllServices.Container, coroutineRunner);
+            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), AllServices.Container, coroutineRunner, distanceControlService);
       
         }
 

@@ -48,7 +48,7 @@ namespace CodeBase.infrastructure.States
             GameFiled gameFiled = prefabGameField.GetComponent<GameFiled>();
             SpawnPoint spawnPoint = gameFiled.spawnPoint;
             SpawnPointMinic[] spawnPointsMinic = gameFiled.spawnPointsMinic;
-            _spawnerService.StartSapwnWaveCoroutine(LevelWaveId.OneWave, spawnPoint);
+            _spawnerService.SpawnWave(LevelWaveId.OneWave, spawnPoint);
             _spawnerService.SpawnSelectedMinics(spawnPointsMinic, minicsId);
 
 

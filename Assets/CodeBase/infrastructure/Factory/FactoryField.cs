@@ -17,11 +17,7 @@ namespace CodeBase.infrastructure.Factory
     private GameObject _spawnPoint;
     private WayPoint[] _waypoints;
 
-    public WayPoint[] Waypoints
-    {
-        get { return _waypoints; }
-    }
-
+    public WayPoint[] Waypoints => _waypoints;
 
     public GameObject SpawnPoint
     {
@@ -44,11 +40,11 @@ namespace CodeBase.infrastructure.Factory
             
     }
 
-    public GameObject CreateMob(SpawnPoint spawnPoint, GameObject prefab, LinkedList<GameObject> linkedMinicStaticData, List<GameObject> listMinicStaticData)
+    public GameObject CreateMob(SpawnPoint spawnPoint, GameObject prefab)
     {
        var mobGO = Object.Instantiate(prefab, spawnPoint.transform.position, Quaternion.identity);
        Mob mob = mobGO.GetComponent<Mob>();
-       mob.MovingToWaypoints.Construct(_waypoints,linkedMinicStaticData,listMinicStaticData);
+       mob.MovingToWaypoints.Construct(_waypoints);
        return mobGO;
     }
 
