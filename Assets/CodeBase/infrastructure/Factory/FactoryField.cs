@@ -1,8 +1,8 @@
 ﻿using CodeBase.infrastructure.AssetsManager;
-using CodeBase.infrastructure.Logic;
 using CodeBase.infrastructure.Services.MapData;
 using CodeBase.StaticData;
 using GameFieldMono;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -34,9 +34,7 @@ namespace CodeBase.infrastructure.Factory
       IMapDataService mapData)
     {
       _staticDataService = staticDataService;
-      _assetsProvider = assetsProvider;
-   
-     
+      _assetsProvider = assetsProvider; 
     }
 
     public void CreateGameField(GameObject prefab)
@@ -46,19 +44,18 @@ namespace CodeBase.infrastructure.Factory
             
     }
 
-    public GameObject CreateMob(SpawnPoint spawnPoint, GameObject prefab)
+    public GameObject CreateMob(SpawnPoint spawnPoint, GameObject prefab, LinkedList<GameObject> linkedMinicStaticData, List<GameObject> listMinicStaticData)
     {
-       var mob = Object.Instantiate(prefab, spawnPoint.transform.position, Quaternion.identity);
-       mob.GetComponent<MovingToWaypoints>().Construct(_waypoints);
-       return mob;
+       var mobGO = Object.Instantiate(prefab, spawnPoint.transform.position, Quaternion.identity);
+       Mob mob = mobGO.GetComponent<Mob>();
+       mob.MovingToWaypoints.Construct(_waypoints,linkedMinicStaticData,listMinicStaticData);
+       return mobGO;
     }
 
      public GameObject CreateMinic(SpawnPointMinic spawnPoint, GameObject prefab)
      {
             var minic = Object.Instantiate(prefab, spawnPoint.transform.position, Quaternion.Euler(0f, 90f, 0f));
             return minic;
-        }
-
-
+     } 
     }
 }

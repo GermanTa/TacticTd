@@ -5,23 +5,56 @@ using UnityEngine;
 
 public class MovingToWaypoints : MonoBehaviour
 {
+    ISpawnerService _spawnerService;
     private WayPoint[] _waypoints;
-    LinkedList<MonsterStaticData> _linkedMinicStaticData;
-    private int currentWayPoint = 0;
+    LinkedList<GameObject> _linkedMinicStaticData;
+    List<GameObject> _listMinicStaticData;
 
+    private int index;
+    private int currentWayPoint = 0;
     private float speed = 1.0f;
     private float accuracy = 0.3f;
     private float rotationSpeed = 1.0f;
 
-    public void Construct(WayPoint[] waypoints, LinkedList<MonsterStaticData> linkedMinicStaticData)
+    public int Index
+    {
+        set { index = value; }
+    }
+
+    public void Construct(WayPoint[] waypoints, LinkedList<GameObject> linkedMinicStaticData, List<GameObject> listMinicStaticData)
     {
         _waypoints = waypoints;
         _linkedMinicStaticData = linkedMinicStaticData;
+        _listMinicStaticData = listMinicStaticData;
+        
+    }
+    public void Construct(ISpawnerService spawnerService)
+    {
+        _spawnerService = spawnerService;
+
     }
 
+    private void Start()
+    {
+        _spawnerService.ChangedListMobsGO += Reindex;
+    }
+
+
+    public void Reindex(int index)
+    {
+        if(this.index > index)
+        {
+            this.index -= 1;
+        }
+       
+    }
+    private void OnDestroy()
+    {
+        _spawnerService.DeleteMobFromList(index);
+    }
     private void Update()
     {
-        if(_waypoints.Length == 0)
+        if (_waypoints.Length == 0)
         {
             Debug.Log("ERR: _waypoints.Length == 0");
             return;
@@ -33,6 +66,8 @@ public class MovingToWaypoints : MonoBehaviour
         transform.LookAt(wayPointTransfrom);
         //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * rotationSpeed);
 
+        
+
         if(direction.magnitude < accuracy)
         {
             currentWayPoint++;
@@ -43,7 +78,21 @@ public class MovingToWaypoints : MonoBehaviour
             }
         }
 
-        transform.Translate(0,0,speed * Time.deltaTime);
+
+        if (index > 0 && _listMinicStaticData[index - 1] != null)
+        {
+            if ((_listMinicStaticData[index - 1].transform.position - transform.position).magnitude > 1f)
+            {
+                transform.Translate(0, 0, speed * Time.deltaTime);
+            }
+        } else
+        {
+            transform.Translate(0, 0, speed * Time.deltaTime);
+        }
+
+
     }
+
+    
 
 }
