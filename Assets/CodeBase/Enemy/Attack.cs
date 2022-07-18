@@ -1,28 +1,49 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Minic;
 using UnityEngine;
 
-namespace CodeBase.Enemy
-{
+namespace CodeBase.Enemy {
     [RequireComponent(typeof(EnemyAnimator))]
-    public class Attack : MonoBehaviour
-    {
+    public class Attack : MonoBehaviour {
         public EnemyAnimator Animator;
-        private float _effectiveDistance = 0.5f;
+        private float _effectiveDistance = 1f;
         public float AttackCooldown = 0.5f;
         private int _damage = 10;
 
         private AttackState _currentState;
         private IHealth _target;
-        private bool _isAttacking;
         private float _attackCooldown;
+        private Coroutine attackCoroutineLink;
+        
+        public IHealth Target {
+            set { _target = value; }
+        }
 
-        public IHealth Target { set { _target = value; } }
         public float EffectiveDistance => _effectiveDistance;
 
-        private void Update()
+        private void Start() {
+            attackCoroutineLink = StartCoroutine(AttackCoroutine());
+        }
+
+        public void OnDeath() {
+            StopCoroutine(attackCoroutineLink);
+            attackCoroutineLink = null;
+        }
+
+        private IEnumerator AttackCoroutine() {
+            WaitForSeconds waitForSeconds = new WaitForSeconds(AttackCooldown);
+            
+            while (true) {
+                yield return waitForSeconds;
+                StartAttack();
+            }
+        }
+
+
+        /*private void Update()
         {
             UpdateCooldown();
 
@@ -30,50 +51,42 @@ namespace CodeBase.Enemy
             {
                 StartAttack();
             }
-        }
+        }*/
 
-        private void OnAttack()
-        {
+        private void OnAttack() {
             _target.TakeDamage(_damage);
         }
-        private void OnAttackEnded()
-        {
+
+        private void OnAttackEnded() {
             _attackCooldown = AttackCooldown;
-            _isAttacking = false;
         }
 
-        public bool CanAttack()
-        {
-            return _currentState == AttackState.StartAttack && !_isAttacking && CooldownIsUp();
-        }
+        /*public bool CanAttack() {
+            return _currentState == AttackState.StartAttack;
+        }*/
 
-        private void StartAttack()
-        {
+        private void StartAttack() {
             Animator.PlayAttack();
-            _isAttacking = true;
         }
 
         private bool CooldownIsUp() => _attackCooldown <= 0;
-        private void UpdateCooldown()
-        {
-            if (!CooldownIsUp()) _attackCooldown -= Time.deltaTime;
-        }
 
-        public void SetState(AttackState state)
-        {
+        /*private void UpdateCooldown() {
+            if (!CooldownIsUp()) {
+                _attackCooldown -= Time.deltaTime;
+            }
+        }*/
+
+        public void SetState(AttackState state) {
             _currentState = state;
         }
 
-        public void SetTarget(List<GameObject> _minics)
-        {
-
+        public void SetTarget(List<GameObject> _minics) {
         }
     }
 
-    public enum AttackState
-    {
+    public enum AttackState {
         EndAttack,
         StartAttack,
-        
     }
 }

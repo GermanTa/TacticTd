@@ -25,71 +25,64 @@ namespace CodeBase.infrastructure.Services {
             _coroutineRunner.StartCoroutine(DistanseControllerCorutine());
         }
 
-
         IEnumerator DistanseControllerCorutine()
         {
-            var i = 1;
+            var i = 0;
             var indexMinics = 0;
          
             while (true)
             {
-                yield return null;
                 
-                var previousMob = _mobs[i - 1];
+                yield return null;
+
+                Mob previousMob = null;
+                if (i > 0) {
+                    previousMob = _mobs[i - 1];
+                }
+                
                 var mob = _mobs[i];
 
+                var firstMinicPosition = _minics[0].transform.position;
                 
-                if ((_minics[0].transform.position - _mobs[0].transform.position ).magnitude <= 1f)
-                {
-                    _mobs[0].MovingToWaypoints.SetState(MovingState.Staying);
-                    
-                }
-                else
-                {
-                    mob.MovingToWaypoints.SetState(MovingState.Walking);
-                }
-                 
-                if ((mob.transform.position - previousMob.transform.position).magnitude <= 1f)
-                {
-                    mob.MovingToWaypoints.SetState(MovingState.Staying);
-                }
-                else
-                {
-                    mob.MovingToWaypoints.SetState(MovingState.Walking);
-                }
-
-                if (mob.MovingToWaypoints.CurrentState == MovingState.Staying)
-                {
-                    if ((_mobs[0].transform.position - _minics[0].transform.position).magnitude <= 1f)
-                    {
-                        _mobs[0].Attack.Target = _minics[0].GetComponent<IHealth>();
-                        _mobs[0].Attack.SetState(AttackState.StartAttack);
+                
+                if (mob.MovingToWaypoints.CurrentState == MovingState.Walking) {
+                    if (previousMob != null && 
+                        (mob.transform.position - previousMob.transform.position).magnitude <= 1f) {
+                        mob.MovingToWaypoints.SetState(MovingState.Staying);
+                        
+                    } else if ((mob.transform.position - firstMinicPosition).magnitude <= 1f) {
+                        mob.MovingToWaypoints.SetState(MovingState.Staying);
                     }
-                  
-                    //_mobs[0].Attack.Target = _minics[0].GetComponent<IHealth>();
-                    //_mobs[0].Attack.SetState(AttackState.StartAttack);
+                } else {
+                    if (previousMob != null && 
+                        (mob.transform.position - previousMob.transform.position).magnitude > 1f) {
+                        mob.MovingToWaypoints.SetState(MovingState.Walking);
+                    } else if (i == 0 && (mob.transform.position - firstMinicPosition).magnitude > 1f) {
+                        mob.MovingToWaypoints.SetState(MovingState.Walking);
+                    }
                 }
 
-
+                if ((mob.transform.position - firstMinicPosition).magnitude <= mob.Attack.EffectiveDistance) {
+                    mob.Attack.Target = _minics[0].GetComponent<IHealth>();
+                    mob.Attack.SetState(AttackState.StartAttack);
+                } else {
+                    mob.Attack.SetState(AttackState.EndAttack);
+                }
 
                 i++;
-                indexMinics++;
+                //indexMinics++;
 
                 if (i >= _mobs.Count)
                 {
-                    i = 1;
+                    i = 0;
                 }
 
-                if (indexMinics >= _minics.Count)
+                /*if (indexMinics >= _minics.Count)
                 {
                     indexMinics = 0;
-                }
+                }*/
             }
         }
-
-        
-
-
     }
 }
 
