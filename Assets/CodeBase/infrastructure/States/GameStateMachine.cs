@@ -18,8 +18,7 @@ namespace CodeBase.infrastructure.States
             get { return _coroutineRunner; }
         }
 
-        public GameStateMachine(SceneLoader sceneLoader, AllServices services, ICoroutineRunner coroutineRunner,
-            DistanceControlService distanceControlService)
+        public GameStateMachine(SceneLoader sceneLoader, AllServices services, ICoroutineRunner coroutineRunner)
         {
             _coroutineRunner = coroutineRunner;
             _states = new Dictionary<Type, IExitableState>()
@@ -29,11 +28,12 @@ namespace CodeBase.infrastructure.States
                 [typeof(LoadLevelState)] = new LoadLevelState(this,sceneLoader,
                 services.Single<IFactoryField>(),
                 services.Single<IStaticDataService>(),
-                services.Single<ISpawnerService>()
+                services.Single<ISpawnerService>(),
+                services.Single<DistanceControlService>()
                 ),
             };
             
-            services.RegisterSingle(distanceControlService);
+           
         }
         
         public void Enter<TState>() where TState : class, IState

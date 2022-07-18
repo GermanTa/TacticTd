@@ -1,4 +1,5 @@
 using CodeBase.infrastructure.Factory;
+using CodeBase.infrastructure.Services;
 using CodeBase.StaticData;
 using GameFieldMono;
 using UnityEngine;
@@ -13,7 +14,9 @@ namespace CodeBase.infrastructure.States
         private readonly IFactoryField _factoryField;
         private readonly IStaticDataService _staticDataService;
         private readonly ISpawnerService _spawnerService;
-     
+        private readonly DistanceControlService _distanceControlService;
+
+
         private string nameLevel;
         MinicId[] minicsId = new MinicId[] { MinicId.ShieldMaidenMary, MinicId.Countess, MinicId.BountyHunter, MinicId.BoneArcher};
 
@@ -21,13 +24,15 @@ namespace CodeBase.infrastructure.States
             SceneLoader sceneLoader, 
             IFactoryField factoryField, 
             IStaticDataService staticDataService,
-            ISpawnerService spawnerService)
+            ISpawnerService spawnerService,
+            DistanceControlService distanceControlService)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _factoryField = factoryField;
             _staticDataService = staticDataService;
             _spawnerService = spawnerService;
+            _distanceControlService = distanceControlService;
         }
         
         public void Enter(string payload)
@@ -50,20 +55,12 @@ namespace CodeBase.infrastructure.States
             SpawnPointMinic[] spawnPointsMinic = gameFiled.spawnPointsMinic;
             _spawnerService.SpawnWave(LevelWaveId.OneWave, spawnPoint);
             _spawnerService.SpawnSelectedMinics(spawnPointsMinic, minicsId);
-
-
+            _distanceControlService.DistanceControllerUpdate();
 
             if (nameLevel == "Main")
             {
-                
-             
-               
-
-              
-            }
-
-            
-
+                   
+            }         
         }
     }
 }

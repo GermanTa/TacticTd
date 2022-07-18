@@ -4,7 +4,7 @@ namespace CodeBase.Enemy
 {
   public class EnemyAnimator : MonoBehaviour
   {
-    private static readonly int Attack = Animator.StringToHash("Attack_1");
+    private static readonly int Attack = Animator.StringToHash("Attack");
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int IsMoving = Animator.StringToHash("IsMoving");
     private static readonly int Hit = Animator.StringToHash("Hit");
@@ -17,7 +17,7 @@ namespace CodeBase.Enemy
     public void PlayHit() => _animator.SetTrigger(Hit);
     public void PlayDeath() => _animator.SetTrigger(Die);
     public void Move() =>_animator.SetBool(IsMoving, true);
-    public void StopMoving() => _animator.SetBool(IsMoving, false);
+    public void Staying() => _animator.SetBool(IsMoving, false);
     public void PlayAttack() => _animator.SetTrigger(Attack);
     
   }

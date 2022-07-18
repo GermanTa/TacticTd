@@ -42,7 +42,10 @@ namespace CodeBase.infrastructure.Factory
 
     public GameObject CreateMob(SpawnPoint spawnPoint, GameObject prefab)
     {
-       var mobGO = Object.Instantiate(prefab, spawnPoint.transform.position, Quaternion.identity);
+        
+       var mobGO = Object.Instantiate(prefab, spawnPoint.transform.position,Quaternion.identity);
+       var secondWayPoint = _waypoints[1].transform.position;
+       mobGO.transform.LookAt(secondWayPoint);
        Mob mob = mobGO.GetComponent<Mob>();
        mob.MovingToWaypoints.Construct(_waypoints);
        return mobGO;

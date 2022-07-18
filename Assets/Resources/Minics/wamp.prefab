@@ -632,6 +632,9 @@ GameObject:
   - component: {fileID: 95000011776364937}
   - component: {fileID: 114000009736402315}
   - component: {fileID: 114937367900779473}
+  - component: {fileID: -918041989676657104}
+  - component: {fileID: 5758293471661716301}
+  - component: {fileID: -422512259426658993}
   m_Layer: 0
   m_Name: wamp
   m_TagString: Untagged
@@ -721,6 +724,43 @@ MonoBehaviour:
   leftHandContainer: {fileID: 4000011765968461}
   shieldContainer: {fileID: 4000012303466789}
   headContainer: {fileID: 4000010738807541}
+--- !u!114 &-918041989676657104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012310824723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87da347ae184c9380c127709ecae69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5758293471661716301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012310824723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34dd45f4a8015fb41a7ab4e690f171a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-422512259426658993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012310824723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42bcc635a2004532b0b08756a4d6e1cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 5758293471661716301}
 --- !u!1 &1000012317547483
 GameObject:
   m_ObjectHideFlags: 0

@@ -963,6 +963,7 @@ GameObject:
   - component: {fileID: 7074723610562812422}
   - component: {fileID: 540554751298706849}
   - component: {fileID: 3345680407059117502}
+  - component: {fileID: -4459685601824971808}
   m_Layer: 0
   m_Name: bow-bone
   m_TagString: Untagged
@@ -1083,6 +1084,19 @@ MonoBehaviour:
   spawnPointProjectile: {fileID: 6866993740804754153}
   prefabProjectile: {fileID: -1151935926612884567, guid: 6631358f8ce224d4398988e9050db1e2,
     type: 3}
+--- !u!114 &-4459685601824971808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7184838786403036868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42bcc635a2004532b0b08756a4d6e1cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 540554751298706849}
 --- !u!1 &7184838786411131404
 GameObject:
   m_ObjectHideFlags: 0

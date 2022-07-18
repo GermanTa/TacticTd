@@ -8,7 +8,6 @@ namespace CodeBase.UI.Elements
     public HpBar HpBar;
     private IHealth _helth;
     private void OnDestroy() => _helth.HealthChanged -= UpdateHpBar;
-
     public void Construct(IHealth health)
     {
       _helth = health;
@@ -18,7 +17,7 @@ namespace CodeBase.UI.Elements
 
     private void UpdateHpBar()
     {
-      HpBar.SetValue(_helth.Current, _helth.Max);
+      HpBar.SetValue(_helth.CurrentHp, _helth.MaxHp);
     }
   }
 }

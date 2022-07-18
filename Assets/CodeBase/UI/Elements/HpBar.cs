@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace CodeBase.UI.Elements
@@ -11,5 +12,8 @@ namespace CodeBase.UI.Elements
     {
       ImageCurrent.fillAmount = current / max;
     }
-  }
+
+     
+ 
+    }
 }

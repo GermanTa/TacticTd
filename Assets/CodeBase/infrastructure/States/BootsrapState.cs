@@ -35,7 +35,10 @@ namespace CodeBase.infrastructure.States {
                 _services.Single<IFactoryField>(),
                 _stateMachine.CoroutineRunner
             ));
-            
+
+            _services.RegisterSingle(new DistanceControlService(_services.Single<ISpawnerService>(), _stateMachine.CoroutineRunner));
+
+
         }
 
         private void RegisterStaticData() {

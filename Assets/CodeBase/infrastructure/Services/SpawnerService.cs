@@ -16,11 +16,14 @@ namespace CodeBase.Services.SpawnerService
         private readonly IFactoryField _factoryField;
         private LevelStaticData _wave;
 
-        private Dictionary<string, GameObject> _mobs = new();
-        //List<GameObject>  = new List<GameObject>();
+        private Dictionary<string, GameObject> _mobs = new Dictionary<string, GameObject>();
 
         public event Action<int> ChangedListMobsGO;
         public List<GameObject> GetAllMobs() => _mobs.Values.ToList();
+        public List<GameObject> _minics = new List<GameObject>();
+        public List<GameObject> GetMinics => _minics;
+
+       
 
         public SpawnerService(IStaticDataService staticDataService, IFactoryField factoryField, ICoroutineRunner coroutineRunner)
         {
@@ -40,7 +43,8 @@ namespace CodeBase.Services.SpawnerService
             {
                 var spawnPoint = spawnPoinst[i];
                 var minic = _staticDataService.ForMinic(minicsId[i]).Prefab;
-                _factoryField.CreateMinic(spawnPoint, minic);
+                var minicGO =  _factoryField.CreateMinic(spawnPoint, minic);
+                _minics.Add(minicGO);
             }
         }
 

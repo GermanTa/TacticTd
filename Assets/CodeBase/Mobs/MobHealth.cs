@@ -9,12 +9,13 @@ namespace CodeBase.Mobs
    {
       public EnemyAnimator Animator;
       public event Action HealthChanged;
-      public float Current { get; set; }
-      public float Max { get; set; }
+      public int CurrentHp { get; set; }
+      public int MaxHp { get; set; }
       
-      public void TakeDamage(float damage)
+      public void TakeDamage(int damage)
       {
-         Current -= damage;
+            CurrentHp -= damage;
+            Debug.Log(CurrentHp);
     
          Animator.PlayHit();
     

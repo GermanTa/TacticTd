@@ -12,5 +12,5 @@ public interface ISpawnerService : IService
     public event Action<int> ChangedListMobsGO;
 
     public List<GameObject> GetAllMobs();
-
+    List<GameObject> GetMinics { get; }
 }

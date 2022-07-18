@@ -1473,6 +1473,7 @@ GameObject:
   - component: {fileID: 6849001557508841418}
   - component: {fileID: 8323785890224675665}
   - component: {fileID: 3007106566526234713}
+  - component: {fileID: 4864889216270922257}
   m_Layer: 6
   m_Name: bar
   m_TagString: Untagged
@@ -1488,8 +1489,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7220243519024001157}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.757}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.7, y: 1, z: 0.7}
   m_Children:
   - {fileID: 3769176241082508342}
   - {fileID: 1317209311038187229}
@@ -1543,7 +1544,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c21b075cc97c449a95c06fe0209c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
+  Animator: {fileID: 6849001557508841418}
+  id: 
 --- !u!114 &3007106566526234713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1557,6 +1559,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovingToWaypoints: {fileID: 8323785890224675665}
+  Attack: {fileID: 4864889216270922257}
+--- !u!114 &4864889216270922257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7220243519024001157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03ffe037793d6d4428103e6588e9e832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 6849001557508841418}
 --- !u!1 &7491487791899743198
 GameObject:
   m_ObjectHideFlags: 0
