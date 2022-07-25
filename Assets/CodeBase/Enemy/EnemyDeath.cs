@@ -18,11 +18,8 @@ public class EnemyDeath : MonoBehaviour
     {
         mob = GetComponent<Mob>();
         mobHealth.HealthChanged += HealthChanged;
-
     }
 
-
-   
     public void Construct(ISpawnerService spawnerService)
     {
         this.spawnerService = spawnerService;

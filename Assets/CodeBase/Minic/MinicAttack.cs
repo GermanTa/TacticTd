@@ -17,7 +17,24 @@ public class MinicAttack : MonoBehaviour
 
     public IHealth Target
     {
-        set { _target = value; }
+        set {
+            if (_target != null) {
+                _target.DeathEvent -= OnTargetDeath;
+            }
+            
+            _target = value;
+            if (_target != null) {
+                _target.DeathEvent += OnTargetDeath;
+            }
+        }
+    }
+
+    private void OnTargetDeath() {
+        _target.DeathEvent -= OnTargetDeath;
+        _currentState = AttackState.EndAttack;
+        _target = null;
+        _attackInProgress = false;
+        //Animator.PlayIdle();
     }
 
     public float EffectiveDistance => _effectiveDistance;
@@ -33,6 +50,7 @@ public class MinicAttack : MonoBehaviour
         attackCoroutineLink = null;
     }
 
+    private bool _attackInProgress;
     private IEnumerator AttackCoroutine()
     {
 
@@ -40,11 +58,12 @@ public class MinicAttack : MonoBehaviour
 
         while (true)
         {
-            yield return waitForSeconds;
-            if (_currentState == AttackState.StartAttack)
-            {
+            if (_currentState == AttackState.StartAttack && !_attackInProgress) {
+                _attackInProgress = true;
                 StartAttack();
             }
+
+            yield return null;
         }
     }
 
@@ -55,7 +74,7 @@ public class MinicAttack : MonoBehaviour
 
     private void OnAttackEnded()
     {
-
+        _attackInProgress = false;
     }
 
     private void StartAttack()

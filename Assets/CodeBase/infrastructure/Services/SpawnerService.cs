@@ -22,11 +22,6 @@ namespace CodeBase.Services.SpawnerService
         public event Action<string> ChangedListMobsGO;
         public List<GameObject> GetAllMobs() => _mobs.Values.ToList();
         public List<GameObject> GetAllMinics() => _minics.Values.ToList();
-
-        public void DeleteMob(string id)
-        {
-            ChangedListMobsGO?.Invoke(id);
-        }
         
         public SpawnerService(IStaticDataService staticDataService, IFactoryField factoryField, ICoroutineRunner coroutineRunner)
         {
@@ -35,9 +30,9 @@ namespace CodeBase.Services.SpawnerService
             _coroutineRunner = coroutineRunner;
         }
 
-        public void DeleteMobFromList(string id)
-        {
+        public void DeleteMobFromList(string id) {
             _mobs.Remove(id);
+            ChangedListMobsGO?.Invoke(id);
         }
 
         public void SpawnSelectedMinics(SpawnPointMinic[] spawnPoinst, MinicId[] minicsId)

@@ -10,6 +10,7 @@ namespace CodeBase.Minic
         private int _maxHp = 50;
         public MinicAnimator _animator;
         public event Action HealthChanged;
+        public event Action DeathEvent;
 
         public int MaxHp { get; set; }
         public int CurrentHp

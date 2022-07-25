@@ -18,5 +18,9 @@ namespace CodeBase.Minic
     public void PlayHit() => _animator.SetTrigger(Hit);
     public void PlayDeath() => _animator.SetTrigger(Die);
     public void PlayAttack() => _animator.SetTrigger(Attack);
+
+    public void PlayIdle() {
+      _animator.Play(Idle);
+    }
    }
 }

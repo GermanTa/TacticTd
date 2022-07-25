@@ -44,9 +44,13 @@ public class MovingToWaypoints : MonoBehaviour {
             return;
         }
 
+        if (currentWayPoint >= _waypoints.Length) {
+            Animator.Staying();
+            return;
+        }
+
         Animator.Move();
 
-       
         var wayPointTransfrom = _waypoints[currentWayPoint].transform.position;
         Vector3 lookAtGoal = new Vector3(wayPointTransfrom.x, transform.position.y, wayPointTransfrom.z);
         Vector3 direction = lookAtGoal - transform.position;
