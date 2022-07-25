@@ -8,20 +8,20 @@ namespace CodeBase.infrastructure.Services {
     public class DistanceControlService : IService {
         
         private List<Mob> _mobs;
-        private List<GameObject> _minics;
+        private List<MinicComponents> _minics;
         ICoroutineRunner _coroutineRunner;
         ISpawnerService _spawnerService; 
 
        public DistanceControlService(ISpawnerService spawnerService, ICoroutineRunner coroutineRunner) {
             _coroutineRunner = coroutineRunner;
             _spawnerService = spawnerService;
-
+            _spawnerService.ChangedListMobsGO += ChangedListMobsGO;
        }
 
         public void DistanceControllerUpdate()
         {
             _mobs = _spawnerService.GetAllMobs().Select(x => x.GetComponent<Mob>()).ToList();
-            _minics = _spawnerService.GetMinics;
+            _minics = _spawnerService.GetAllMinics().Select(x => x.GetComponent<MinicComponents>()).ToList(); 
             _coroutineRunner.StartCoroutine(DistanseControllerCorutine());
         }
 
@@ -34,14 +34,14 @@ namespace CodeBase.infrastructure.Services {
             {
                 
                 yield return null;
-
                 Mob previousMob = null;
+
                 if (i > 0) {
                     previousMob = _mobs[i - 1];
                 }
                 
                 var mob = _mobs[i];
-
+                MinicComponents minic = _minics[indexMinics];
                 var firstMinicPosition = _minics[0].transform.position;
                 
                 
@@ -64,24 +64,41 @@ namespace CodeBase.infrastructure.Services {
 
                 if ((mob.transform.position - firstMinicPosition).magnitude <= mob.Attack.EffectiveDistance) {
                     mob.Attack.Target = _minics[0].GetComponent<IHealth>();
-                    mob.Attack.SetState(AttackState.StartAttack);
+                   mob.Attack.SetState(AttackState.StartAttack);
                 } else {
                     mob.Attack.SetState(AttackState.EndAttack);
                 }
 
+                
+                if ( (minic.transform.position - mob.transform.position).magnitude <= minic.minicAttack.EffectiveDistance)
+                {
+                    minic.minicAttack.Target = mob.MobHealth;
+                    Debug.Log(mob.MobHealth);
+                    minic.minicAttack.SetState(AttackState.StartAttack);
+                } else
+                {
+                    minic.minicAttack.SetState(AttackState.EndAttack);
+                }
+
                 i++;
-                //indexMinics++;
+                indexMinics++;
 
                 if (i >= _mobs.Count)
                 {
                     i = 0;
                 }
 
-                /*if (indexMinics >= _minics.Count)
+                if (indexMinics >= _minics.Count)
                 {
                     indexMinics = 0;
-                }*/
+                }
             }
+        }
+
+        private void ChangedListMobsGO(string obj)
+        {
+            _mobs = _spawnerService.GetAllMobs().Select(x => x.GetComponent<Mob>()).ToList();
+            _minics = _spawnerService.GetAllMinics().Select(x => x.GetComponent<MinicComponents>()).ToList();
         }
     }
 }

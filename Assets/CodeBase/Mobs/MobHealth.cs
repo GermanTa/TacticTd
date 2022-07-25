@@ -1,6 +1,5 @@
 using System;
 using CodeBase.Enemy;
-using CodeBase.infrastructure.Logic;
 using UnityEngine;
 
 namespace CodeBase.Mobs
@@ -14,8 +13,8 @@ namespace CodeBase.Mobs
       
       public void TakeDamage(int damage)
       {
+            Debug.Log("tut " + CurrentHp);
             CurrentHp -= damage;
-            Debug.Log(CurrentHp);
     
          Animator.PlayHit();
     

@@ -17,14 +17,17 @@ namespace CodeBase.Services.SpawnerService
         private LevelStaticData _wave;
 
         private Dictionary<string, GameObject> _mobs = new Dictionary<string, GameObject>();
+        private Dictionary<string, GameObject> _minics = new Dictionary<string, GameObject>();
 
-        public event Action<int> ChangedListMobsGO;
+        public event Action<string> ChangedListMobsGO;
         public List<GameObject> GetAllMobs() => _mobs.Values.ToList();
-        public List<GameObject> _minics = new List<GameObject>();
-        public List<GameObject> GetMinics => _minics;
+        public List<GameObject> GetAllMinics() => _minics.Values.ToList();
 
-       
-
+        public void DeleteMob(string id)
+        {
+            ChangedListMobsGO?.Invoke(id);
+        }
+        
         public SpawnerService(IStaticDataService staticDataService, IFactoryField factoryField, ICoroutineRunner coroutineRunner)
         {
             _staticDataService = staticDataService;
@@ -44,7 +47,10 @@ namespace CodeBase.Services.SpawnerService
                 var spawnPoint = spawnPoinst[i];
                 var minic = _staticDataService.ForMinic(minicsId[i]).Prefab;
                 var minicGO =  _factoryField.CreateMinic(spawnPoint, minic);
-                _minics.Add(minicGO);
+                var minicComponents = minicGO.GetComponent<MinicComponents>();
+                var id = Guid.NewGuid().ToString();
+                minicComponents.id = id;
+                _minics.Add(id, minicGO);
             }
         }
 
@@ -54,14 +60,14 @@ namespace CodeBase.Services.SpawnerService
             for (int i = 0; i < _wave.MonsterStaticData.Count; i++)
             {
                 var item = _wave.MonsterStaticData[i];
-                var mobGO = _factoryField.CreateMob(spawnPoint, item.Prefab); //item.prefabName
-                //Resources.LoadAll<Mob>("Mobs");
+                var mobGO = _factoryField.CreateMob(spawnPoint, item.Prefab);
 
                 Mob mob = mobGO.GetComponent<Mob>();
                 mob.MovingToWaypoints.Construct(_factoryField.Waypoints);
                 mobGO.SetActive(false);
                 var id = Guid.NewGuid().ToString();
-                mob.MovingToWaypoints.id = id;
+                mob.Id = id;
+                mob.EnemyDeath.Construct(this);
                 _mobs.Add(id, mobGO);
             }
 

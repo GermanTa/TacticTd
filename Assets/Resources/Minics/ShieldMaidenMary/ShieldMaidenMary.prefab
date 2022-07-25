@@ -637,6 +637,8 @@ GameObject:
   - component: {fileID: 3354450763378987344}
   - component: {fileID: 3554062040770226561}
   - component: {fileID: 4310911717074972915}
+  - component: {fileID: -8884055936338715415}
+  - component: {fileID: 4914596461363253411}
   m_Layer: 0
   m_Name: ShieldMaidenMary
   m_TagString: Untagged
@@ -670,7 +672,7 @@ Animator:
   m_GameObject: {fileID: 1000012310824723}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: cd58eced228a0df44ae3596b8fe2f44d, type: 3}
-  m_Controller: {fileID: 9100000, guid: 02d5ec93278ea5c4cae238841be11363, type: 2}
+  m_Controller: {fileID: 9100000, guid: c08e6ce89db3b4348bfa24e1ae8fe889, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -763,6 +765,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 3554062040770226561}
+--- !u!114 &-8884055936338715415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012310824723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df5fd4173d5f45549bebe129bda31f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 3554062040770226561}
+  AttackCooldown: 1
+--- !u!114 &4914596461363253411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012310824723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a26d22e655f779141b82d8d50661e906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 
+  minicAnimator: {fileID: 3554062040770226561}
+  minicHealth: {fileID: 4310911717074972915}
+  minicAttack: {fileID: -8884055936338715415}
 --- !u!1 &1000012317547483
 GameObject:
   m_ObjectHideFlags: 0

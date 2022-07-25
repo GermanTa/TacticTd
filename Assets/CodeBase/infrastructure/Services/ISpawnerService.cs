@@ -9,8 +9,8 @@ public interface ISpawnerService : IService
     public void SpawnWave(LevelWaveId waveId, SpawnPoint spawnPoint);
     public void SpawnSelectedMinics(SpawnPointMinic[] spawnPoinst, MinicId[] minicsId);
     public void DeleteMobFromList(string id);
-    public event Action<int> ChangedListMobsGO;
+    public event Action<string> ChangedListMobsGO;
 
     public List<GameObject> GetAllMobs();
-    List<GameObject> GetMinics { get; }
+    public List<GameObject> GetAllMinics();
 }

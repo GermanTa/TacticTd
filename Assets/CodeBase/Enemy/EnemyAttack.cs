@@ -7,10 +7,10 @@ using UnityEngine;
 
 namespace CodeBase.Enemy {
     [RequireComponent(typeof(EnemyAnimator))]
-    public class Attack : MonoBehaviour {
+    public class EnemyAttack : MonoBehaviour {
         public EnemyAnimator Animator;
         private float _effectiveDistance = 1f;
-        public float AttackCooldown = 0.5f;
+        public float AttackCooldown = 10f;
         private int _damage = 10;
 
         private AttackState _currentState;
@@ -34,11 +34,18 @@ namespace CodeBase.Enemy {
         }
 
         private IEnumerator AttackCoroutine() {
+           
             WaitForSeconds waitForSeconds = new WaitForSeconds(AttackCooldown);
             
             while (true) {
                 yield return waitForSeconds;
-                StartAttack();
+                if (_currentState == AttackState.StartAttack)
+                {
+                    StartAttack();
+                }
+
+               
+
             }
         }
 
@@ -58,24 +65,12 @@ namespace CodeBase.Enemy {
         }
 
         private void OnAttackEnded() {
-            _attackCooldown = AttackCooldown;
+          
         }
-
-        /*public bool CanAttack() {
-            return _currentState == AttackState.StartAttack;
-        }*/
 
         private void StartAttack() {
             Animator.PlayAttack();
         }
-
-        private bool CooldownIsUp() => _attackCooldown <= 0;
-
-        /*private void UpdateCooldown() {
-            if (!CooldownIsUp()) {
-                _attackCooldown -= Time.deltaTime;
-            }
-        }*/
 
         public void SetState(AttackState state) {
             _currentState = state;
@@ -85,8 +80,5 @@ namespace CodeBase.Enemy {
         }
     }
 
-    public enum AttackState {
-        EndAttack,
-        StartAttack,
-    }
+    
 }

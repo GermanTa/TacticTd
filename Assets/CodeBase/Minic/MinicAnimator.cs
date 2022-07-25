@@ -8,7 +8,7 @@ namespace CodeBase.Minic
     private static readonly int Hit = Animator.StringToHash("Hit");
     private static readonly int Die = Animator.StringToHash("Die");
     private static readonly int Idle = Animator.StringToHash("Idle");
-    private static readonly int AttackBool = Animator.StringToHash("AttackBool");
+    private static readonly int AttackBool = Animator.StringToHash("Attack_1");
 
     private Animator _animator;
 
@@ -17,6 +17,6 @@ namespace CodeBase.Minic
 
     public void PlayHit() => _animator.SetTrigger(Hit);
     public void PlayDeath() => _animator.SetTrigger(Die);
-    public void PlayAttack() => _animator.SetBool(AttackBool, true);
-  }
+    public void PlayAttack() => _animator.SetTrigger(Attack);
+   }
 }
