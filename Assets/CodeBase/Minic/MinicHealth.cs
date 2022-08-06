@@ -25,10 +25,12 @@ namespace CodeBase.Minic
 
             if(CurrentHp <= 0)
             {
+                DeathEvent.Invoke();
                 return;
             }
 
             CurrentHp -= damage;
+
             _animator.PlayHit();
         }
     }

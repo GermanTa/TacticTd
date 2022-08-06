@@ -47,6 +47,9 @@ namespace CodeBase.infrastructure.Factory
        var secondWayPoint = _waypoints[1].transform.position;
        mobGO.transform.LookAt(secondWayPoint);
        Mob mob = mobGO.GetComponent<Mob>();
+       mob.MobHealth.MaxHp = 50;
+       mob.MobHealth.CurrentHp = mob.MobHealth.MaxHp;
+       mob.ActorUi.Construct(mob.MobHealth);
        mob.MovingToWaypoints.Construct(_waypoints);
        return mobGO;
     }
@@ -54,6 +57,10 @@ namespace CodeBase.infrastructure.Factory
      public GameObject CreateMinic(SpawnPointMinic spawnPoint, GameObject prefab)
      {
             var minic = Object.Instantiate(prefab, spawnPoint.transform.position, Quaternion.Euler(0f, 90f, 0f));
+            MinicComponents minicComponents = minic.GetComponent<MinicComponents>();
+            minicComponents.minicHealth.MaxHp = 200;
+            minicComponents.minicHealth.CurrentHp = minicComponents.minicHealth.MaxHp;
+            minicComponents.ActorUi.Construct(minicComponents.minicHealth);
             return minic;
      } 
     }

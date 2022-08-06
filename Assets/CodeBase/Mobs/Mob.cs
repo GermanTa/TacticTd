@@ -1,6 +1,6 @@
 using CodeBase.Enemy;
 using CodeBase.Mobs;
-using CodeBase.Services.SpawnerService;
+using CodeBase.UI.Elements;
 using UnityEngine;
 
 public class Mob : MonoBehaviour
@@ -10,8 +10,7 @@ public class Mob : MonoBehaviour
     public EnemyAttack Attack;
     public MobHealth MobHealth;
     public EnemyDeath EnemyDeath;
-
-   
+    public ActorUi ActorUi;
 }
 
 public enum AttackType

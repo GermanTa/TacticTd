@@ -19,7 +19,8 @@ namespace CodeBase.Services.SpawnerService
         private Dictionary<string, GameObject> _mobs = new Dictionary<string, GameObject>();
         private Dictionary<string, GameObject> _minics = new Dictionary<string, GameObject>();
 
-        public event Action<string> ChangedListMobsGO;
+        public event Action<string> ChangedListMobs;
+        public event Action<string> ChangedListMinics;
         public List<GameObject> GetAllMobs() => _mobs.Values.ToList();
         public List<GameObject> GetAllMinics() => _minics.Values.ToList();
         
@@ -32,7 +33,12 @@ namespace CodeBase.Services.SpawnerService
 
         public void DeleteMobFromList(string id) {
             _mobs.Remove(id);
-            ChangedListMobsGO?.Invoke(id);
+            ChangedListMobs?.Invoke(id);
+        }
+        public void DeleteMinicFromList(string id)
+        {
+            _minics.Remove(id);
+            ChangedListMinics?.Invoke(id);
         }
 
         public void SpawnSelectedMinics(SpawnPointMinic[] spawnPoinst, MinicId[] minicsId)
@@ -45,7 +51,7 @@ namespace CodeBase.Services.SpawnerService
                 var minicComponents = minicGO.GetComponent<MinicComponents>();
                 var id = Guid.NewGuid().ToString();
                 minicComponents.id = id;
-                _minics.Add(id, minicGO);
+                _minics.Add(minicComponents.id, minicGO);  
             }
         }
 

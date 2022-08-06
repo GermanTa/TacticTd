@@ -6,11 +6,12 @@ using UnityEngine;
 
 public interface ISpawnerService : IService
 {
-    public void SpawnWave(LevelWaveId waveId, SpawnPoint spawnPoint);
-    public void SpawnSelectedMinics(SpawnPointMinic[] spawnPoinst, MinicId[] minicsId);
-    public void DeleteMobFromList(string id);
-    public event Action<string> ChangedListMobsGO;
-
+    public event Action<string> ChangedListMobs;
+    public event Action<string> ChangedListMinics;
     public List<GameObject> GetAllMobs();
     public List<GameObject> GetAllMinics();
+    public void SpawnWave(LevelWaveId waveId, SpawnPoint spawnPoint);
+    public void SpawnSelectedMinics(SpawnPointMinic[] spawnPoinst, MinicId[] minicsId);
+    public void DeleteMinicFromList(string id);
+    public void DeleteMobFromList(string id);
 }

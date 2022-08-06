@@ -9,8 +9,9 @@ namespace CodeBase.Enemy
     private static readonly int IsMoving = Animator.StringToHash("IsMoving");
     private static readonly int Hit = Animator.StringToHash("Hit");
     private static readonly int Die = Animator.StringToHash("Die");
-    
-    private Animator _animator;
+    private static readonly int Idle = Animator.StringToHash("Idle");
+
+        private Animator _animator;
     private void Awake() => 
       _animator = GetComponent<Animator>();
     
@@ -19,6 +20,8 @@ namespace CodeBase.Enemy
     public void Move() =>_animator.SetBool(IsMoving, true);
     public void Staying() => _animator.SetBool(IsMoving, false);
     public void PlayAttack() => _animator.SetTrigger(Attack);
-    
-  }
+
+      
+
+    }
 }

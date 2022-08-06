@@ -484,6 +484,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7400277050800804703}
   - component: {fileID: 7548318900354584865}
+  - component: {fileID: 7558416412244407888}
   m_Layer: 6
   m_Name: HpBar
   m_TagString: Untagged
@@ -521,6 +522,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2461149010252700183}
   m_CullTransparentMesh: 1
+--- !u!114 &7558416412244407888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2461149010252700183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8ff57d09c724d2594e54449ccb70615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ImageCurrent: {fileID: 3031117421747345150}
 --- !u!1 &2749228107274007305
 GameObject:
   m_ObjectHideFlags: 0
@@ -775,7 +789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6663697902457392886
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1282,7 +1296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5d264758051b88d4d9ff7b172274a0c6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 22a4f8fa8abbba04b8125dab0b864fef, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1348,7 +1362,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6677177152031546530}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1381,14 +1395,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8773585, g: 0.11091134, b: 0.11091134, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5d264758051b88d4d9ff7b172274a0c6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 22a4f8fa8abbba04b8125dab0b864fef, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1476,6 +1490,7 @@ GameObject:
   - component: {fileID: 4864889216270922257}
   - component: {fileID: -3432380205774290105}
   - component: {fileID: -5297442609701743054}
+  - component: {fileID: 7477786106648697052}
   m_Layer: 6
   m_Name: bar
   m_TagString: Untagged
@@ -1565,6 +1580,7 @@ MonoBehaviour:
   Attack: {fileID: 4864889216270922257}
   MobHealth: {fileID: -3432380205774290105}
   EnemyDeath: {fileID: -5297442609701743054}
+  ActorUi: {fileID: 7477786106648697052}
 --- !u!114 &4864889216270922257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1606,6 +1622,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyAnimator: {fileID: 6849001557508841418}
   mobHealth: {fileID: -3432380205774290105}
+--- !u!114 &7477786106648697052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7220243519024001157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fcf6b603b8c4e0f83da2c1c4b9e8b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HpBar: {fileID: 7558416412244407888}
 --- !u!1 &7491487791899743198
 GameObject:
   m_ObjectHideFlags: 0
@@ -1759,7 +1788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

@@ -14,6 +14,9 @@ public class MinicAttack : MonoBehaviour
     private IHealth _target;
     private float _attackCooldown;
     private Coroutine attackCoroutineLink;
+    private bool _attackInProgress;
+
+    public float EffectiveDistance => _effectiveDistance;
 
     public IHealth Target
     {
@@ -37,8 +40,6 @@ public class MinicAttack : MonoBehaviour
         //Animator.PlayIdle();
     }
 
-    public float EffectiveDistance => _effectiveDistance;
-
     private void Start()
     {
         attackCoroutineLink = StartCoroutine(AttackCoroutine());
@@ -50,7 +51,7 @@ public class MinicAttack : MonoBehaviour
         attackCoroutineLink = null;
     }
 
-    private bool _attackInProgress;
+    
     private IEnumerator AttackCoroutine()
     {
 
@@ -63,7 +64,7 @@ public class MinicAttack : MonoBehaviour
                 StartAttack();
             }
 
-            yield return null;
+            yield return waitForSeconds;
         }
     }
 

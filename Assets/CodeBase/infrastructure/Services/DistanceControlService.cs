@@ -15,8 +15,11 @@ namespace CodeBase.infrastructure.Services {
         public DistanceControlService(ISpawnerService spawnerService, ICoroutineRunner coroutineRunner) {
             _coroutineRunner = coroutineRunner;
             _spawnerService = spawnerService;
-            _spawnerService.ChangedListMobsGO += ChangedListMobsGO;
+            _spawnerService.ChangedListMobs += ChangedListMobsGO;
+            _spawnerService.ChangedListMinics += ChangedListMinics;
         }
+
+       
 
         public void DistanceControllerUpdate() {
             _mobs = _spawnerService.GetAllMobs().Select(x => x.GetComponent<Mob>()).ToList();
@@ -69,8 +72,7 @@ namespace CodeBase.infrastructure.Services {
                         var mob = _mobs[k];
                         if ((minic.transform.position - mob.transform.position).magnitude <=
                             minic.minicAttack.EffectiveDistance) {
-                            minic.minicAttack.Target = mob.MobHealth;
-                            Debug.Log(mob.MobHealth);
+                            minic.minicAttack.Target = mob.MobHealth;                         
                             minic.minicAttack.SetState(AttackState.StartAttack);
                             break;
                         } else {
@@ -83,6 +85,10 @@ namespace CodeBase.infrastructure.Services {
 
         private void ChangedListMobsGO(string obj) {
             _mobs = _spawnerService.GetAllMobs().Select(x => x.GetComponent<Mob>()).ToList();
+        }
+
+        private void ChangedListMinics(string obj)
+        {
             _minics = _spawnerService.GetAllMinics().Select(x => x.GetComponent<MinicComponents>()).ToList();
         }
     }
