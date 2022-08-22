@@ -1,5 +1,6 @@
 using CodeBase.Minic;
 using System.Collections;
+using CodeBase.Services.SpawnerService;
 using UnityEngine;
 
 [RequireComponent(typeof(MinicAnimator))]
@@ -11,29 +12,30 @@ public class MinicAttack : MonoBehaviour
     private int _damage = 10;
 
     private AttackState _currentState;
-    private IHealth _target;
+    private Mob _target;
     private float _attackCooldown;
     private Coroutine attackCoroutineLink;
     private bool _attackInProgress;
+    private SpawnerService _spawnerService;
 
     public float EffectiveDistance => _effectiveDistance;
 
-    public IHealth Target
+    public Mob Target
     {
         set {
             if (_target != null) {
-                _target.DeathEvent -= OnTargetDeath;
+                _target.MobHealth.DeathEvent -= OnTargetDeath;
             }
             
             _target = value;
             if (_target != null) {
-                _target.DeathEvent += OnTargetDeath;
+                _target.MobHealth.DeathEvent += OnTargetDeath;
             }
         }
     }
 
     private void OnTargetDeath(string id) {
-        _target.DeathEvent -= OnTargetDeath;
+        _target.MobHealth.DeathEvent -= OnTargetDeath;
         _currentState = AttackState.EndAttack;
         //_target = null;
         _attackInProgress = false;
@@ -68,9 +70,9 @@ public class MinicAttack : MonoBehaviour
         }
     }
 
-    private void OnAttack()
+    protected virtual void OnAttack()
     {
-        _target.TakeDamage(_damage);
+        _target.MobHealth.TakeDamage(_damage);
     }
 
     private void OnAttackEnded()
@@ -88,6 +90,7 @@ public class MinicAttack : MonoBehaviour
         _currentState = state;
     }
 
-    
+    public void Construct(SpawnerService spawnerService) {
+        _spawnerService = spawnerService;
+    }
 }
-

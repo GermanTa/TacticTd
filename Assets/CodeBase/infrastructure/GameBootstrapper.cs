@@ -16,13 +16,9 @@ namespace CodeBase.infrastructure
         {
             //точка входа в игру
             _game1 = new Game(this);
-
-         
             _game1.StateMachine.Enter<BootsrapState>();
-
-            DontDestroyOnLoad(this); 
+            
+            DontDestroyOnLoad(this);
         }
-
-     
     }
 }

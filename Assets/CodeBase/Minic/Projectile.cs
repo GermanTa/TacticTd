@@ -35,7 +35,6 @@ namespace CodeBase.Minic
                 //other.transform.GetComponent<IHealth>().TakeDamage(Damage);
                 //Destroy Object
                 Destroy(gameObject);
-                
             }
             
             

@@ -19,11 +19,9 @@ namespace CodeBase.infrastructure.Services {
             _spawnerService.ChangedListMinics += ChangedListMinics;
         }
 
-       
-
         public void DistanceControllerUpdate() {
-            _mobs = _spawnerService.GetAllMobs().Select(x => x.GetComponent<Mob>()).ToList();
-            _minics = _spawnerService.GetAllMinics().Select(x => x.GetComponent<MinicComponents>()).ToList();
+            _mobs = _spawnerService.GetAllMobs();
+            _minics = _spawnerService.GetAllMinics();
             _coroutineRunner.StartCoroutine(DistanseControllerCorutine());
         }
 
@@ -55,19 +53,17 @@ namespace CodeBase.infrastructure.Services {
                         } else if (i == 0 && (mob.transform.position - firstMinicPosition).magnitude > 1f) {
                             mob.MovingToWaypoints.SetState(MovingState.Walking);
                         }
-                    }       
+                    }
                 }
             }
         }
 
         private void ChangedListMobsGO(string obj) {
-            _mobs = _spawnerService.GetAllMobs().Select(x => x.GetComponent<Mob>()).ToList();
-
+            _mobs = _spawnerService.GetAllMobs();
         }
 
-        private void ChangedListMinics(string obj)
-        {
-            _minics = _spawnerService.GetAllMinics().Select(x => x.GetComponent<MinicComponents>()).ToList();
+        private void ChangedListMinics(string obj) {
+            _minics = _spawnerService.GetAllMinics();
         }
     }
 }

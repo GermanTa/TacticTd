@@ -27,7 +27,6 @@ namespace CodeBase.Services.SpawnerService
         public Dictionary<string, Mob> Mobs => _mobs;
         public Dictionary<string, MinicComponents> Minics => _minics;
 
-
         public SpawnerService(IStaticDataService staticDataService, IFactoryField factoryField, ICoroutineRunner coroutineRunner)
         {
             _staticDataService = staticDataService;
@@ -53,7 +52,7 @@ namespace CodeBase.Services.SpawnerService
                 var minic = _staticDataService.ForMinic(minicsId[i]).Prefab;
                 var minicGO =  _factoryField.CreateMinic(spawnPoint, minic);
                 var minicComponents = minicGO.GetComponent<MinicComponents>();
-                minicComponents.MinicDeath.Construct(this);
+                minicComponents.Construct(this);
                 var id = Guid.NewGuid().ToString();
                 minicComponents.id = id;
                 _minics.Add(minicComponents.id, minicComponents);  
@@ -90,6 +89,10 @@ namespace CodeBase.Services.SpawnerService
                 yield return spawnWaveCoroutine;
             }
 
+        }
+
+        public void SpawnProjectile(Mob target, Vector3 origin, float damage) {
+            _factoryField.CreateProjectile
         }
     }
 

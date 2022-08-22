@@ -4,7 +4,7 @@ using UnityEngine;
 namespace CodeBase.Minic
 {
   [RequireComponent(typeof(MinicAnimator))]
-  public class MinicHealth : MonoBehaviour,IHealth
+  public class MinicHealth : MonoBehaviour, IHealth
   {
         MinicComponents minicComponent;
         private int _health = 50;
