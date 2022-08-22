@@ -14,8 +14,11 @@ namespace CodeBase.Enemy
         private Animator _animator;
     private void Awake() => 
       _animator = GetComponent<Animator>();
-    
-    public void PlayHit() => _animator.SetTrigger(Hit);
+
+        public void PlayHit()
+        {
+            if (_animator != null) _animator.SetTrigger(Hit);
+        }
     public void PlayDeath() => _animator.SetTrigger(Die);
     public void Move() =>_animator.SetBool(IsMoving, true);
     public void Staying() => _animator.SetBool(IsMoving, false);

@@ -29,7 +29,8 @@ namespace CodeBase.infrastructure.States
                 services.Single<IFactoryField>(),
                 services.Single<IStaticDataService>(),
                 services.Single<ISpawnerService>(),
-                services.Single<DistanceControlService>()
+                services.Single<DistanceControlService>(),
+                services.Single<BattleService>()
                 ),
             };
             

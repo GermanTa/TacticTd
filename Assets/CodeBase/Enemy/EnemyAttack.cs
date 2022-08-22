@@ -1,16 +1,13 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using CodeBase.Minic;
 using UnityEngine;
 
 namespace CodeBase.Enemy {
     [RequireComponent(typeof(EnemyAnimator))]
     public class EnemyAttack : MonoBehaviour {
         public EnemyAnimator Animator;
-        private float _effectiveDistance = 1f;
-        private int _damage = 150;
+        public float _effectiveDistance = 1f;
+        private int _damage = 50;
         public float AttackCooldown = 1f;
         public float EffectiveDistance => _effectiveDistance;
 
@@ -19,26 +16,16 @@ namespace CodeBase.Enemy {
         private Coroutine attackCoroutineLink;
         private bool attackInProgress = false;
 
-        public IHealth Target {
+        public IHealth Target {           
             set
-            {
-                if (_target != null)
+            {    
+                if(_target == null)
                 {
-                    _target.DeathEvent -= OnTargetDeath;
-                }
-
-                _target = value;
-                if (_target != null)
-                {
+                    _target = value;
                     _target.DeathEvent += OnTargetDeath;
-                }
-               
+                }                 
             }
         }
-
-      
-
-
 
         private void Start() {
             attackCoroutineLink = StartCoroutine(AttackCoroutine());
@@ -51,13 +38,13 @@ namespace CodeBase.Enemy {
             attackCoroutineLink = null;
         }
 
-        private void OnTargetDeath()
+        private void OnTargetDeath(string id)
         {
             
            
             _target.DeathEvent -= OnTargetDeath;
             _currentState = AttackState.EndAttack;
-            _target = null;
+            //_target = null;
             attackInProgress = false;
             //Animator.PlayIdle();
         }

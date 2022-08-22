@@ -6,9 +6,9 @@ using UnityEngine;
 public class MinicAttack : MonoBehaviour
 {
     public MinicAnimator Animator;
-    public float _effectiveDistance = 1f;
+    private float _effectiveDistance = 1f;
     public float AttackCooldown = 1f;
-    private int _damage = 10;
+    private int _damage = 5;
 
     private AttackState _currentState;
     private IHealth _target;
@@ -21,21 +21,27 @@ public class MinicAttack : MonoBehaviour
     public IHealth Target
     {
         set {
-            if (_target != null) {
-                _target.DeathEvent -= OnTargetDeath;
-            }
-            
-            _target = value;
-            if (_target != null) {
+
+            if (_target == null)
+            {
+                _target = value;
                 _target.DeathEvent += OnTargetDeath;
             }
+            //if (_target != null) {
+            //    _target.DeathEvent -= OnTargetDeath;
+            //}
+            
+            //_target = value;
+            //if (_target != null) {
+            //    _target.DeathEvent += OnTargetDeath;
+            //}
         }
     }
 
-    private void OnTargetDeath(string id) {
+    private void OnTargetDeath() {
         _target.DeathEvent -= OnTargetDeath;
         _currentState = AttackState.EndAttack;
-        //_target = null;
+        _target = null;
         _attackInProgress = false;
         //Animator.PlayIdle();
     }

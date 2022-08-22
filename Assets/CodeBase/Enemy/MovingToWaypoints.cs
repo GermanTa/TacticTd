@@ -15,9 +15,9 @@ public class MovingToWaypoints : MonoBehaviour {
 
     public string id;
     private int currentWayPoint = 0;
-    private float speed = 1.0f;
+    private float speed = 3.0f;
     private float accuracy = 0.3f;
-    private float rotationSpeed = 10f;
+    private float rotationSpeed = 15f;
     
 
 

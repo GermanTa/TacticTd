@@ -4,13 +4,14 @@ using CodeBase.infrastructure.Services;
 using CodeBase.infrastructure.States;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
 
 namespace CodeBase.infrastructure
 {
     public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
     {
         private Game _game1;
-        
+
         private void Awake()
         {
             //точка входа в игру

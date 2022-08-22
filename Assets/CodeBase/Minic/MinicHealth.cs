@@ -6,11 +6,12 @@ namespace CodeBase.Minic
   [RequireComponent(typeof(MinicAnimator))]
   public class MinicHealth : MonoBehaviour,IHealth
   {
+        MinicComponents minicComponent;
         private int _health = 50;
         private int _maxHp = 50;
         public MinicAnimator _animator;
         public event Action HealthChanged;
-        public event Action DeathEvent;
+        public event Action<string> DeathEvent;
 
         public int MaxHp { get; set; }
         public int CurrentHp
@@ -20,12 +21,17 @@ namespace CodeBase.Minic
 
         }
 
+        private void Awake()
+        {
+            minicComponent = GetComponent<MinicComponents>();
+        }
+
         public void TakeDamage(int damage)
         { 
 
             if(CurrentHp <= 0)
             {
-                DeathEvent.Invoke();
+                DeathEvent.Invoke(minicComponent.id);
                 return;
             }
 

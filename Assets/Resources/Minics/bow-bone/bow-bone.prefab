@@ -1100,6 +1100,7 @@ MonoBehaviour:
   minicHealth: {fileID: -4459685601824971808}
   minicAttack: {fileID: -9124619856690266943}
   ActorUi: {fileID: 6015609075952838694}
+  MinicDeath: {fileID: -240057561521218188}
 --- !u!114 &-9124619856690266943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1109,11 +1110,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7184838786403036868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df5fd4173d5f45549bebe129bda31f3d, type: 3}
+  m_Script: {fileID: 11500000, guid: 574ab003746160d42ae67d25579d0f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Animator: {fileID: 4449847285402378479}
-  AttackCooldown: 10
+  Animator: {fileID: 540554751298706849}
+  AttackCooldown: 1
 --- !u!114 &6015609075952838694
 MonoBehaviour:
   m_ObjectHideFlags: 0

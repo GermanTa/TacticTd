@@ -2,7 +2,6 @@
 using CodeBase.infrastructure.Services.MapData;
 using CodeBase.StaticData;
 using GameFieldMono;
-using System.Collections.Generic;
 using UnityEngine;
 
 

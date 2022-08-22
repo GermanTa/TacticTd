@@ -15,7 +15,7 @@ namespace CodeBase.Enemy
         private int currentWp = 0;
         private float rotSpeed = 25f;
         private double accuracy = 0.1f;
-        private float speed = 1f;
+        private float speed = 3f;
 
         RaycastHit hit;
         private void Update()

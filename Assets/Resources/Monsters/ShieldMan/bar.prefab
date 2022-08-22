@@ -1594,7 +1594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 6849001557508841418}
-  AttackCooldown: 2
+  AttackCooldown: 1
 --- !u!114 &-3432380205774290105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1607,6 +1607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04064bde9ff665947b9c6594192a752b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mob: {fileID: 3007106566526234713}
   Animator: {fileID: 6849001557508841418}
 --- !u!114 &-5297442609701743054
 MonoBehaviour:

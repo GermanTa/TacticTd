@@ -16,14 +16,18 @@ namespace CodeBase.Services.SpawnerService
         private readonly IFactoryField _factoryField;
         private LevelStaticData _wave;
 
-        private Dictionary<string, GameObject> _mobs = new Dictionary<string, GameObject>();
-        private Dictionary<string, GameObject> _minics = new Dictionary<string, GameObject>();
+        private Dictionary<string, Mob> _mobs = new Dictionary<string, Mob>();
+        private Dictionary<string, MinicComponents> _minics = new Dictionary<string, MinicComponents>();
 
         public event Action<string> ChangedListMobs;
         public event Action<string> ChangedListMinics;
-        public List<GameObject> GetAllMobs() => _mobs.Values.ToList();
-        public List<GameObject> GetAllMinics() => _minics.Values.ToList();
-        
+        public List<Mob> GetAllMobs() => _mobs.Values.ToList();
+        public List<MinicComponents> GetAllMinics() => _minics.Values.ToList();
+
+        public Dictionary<string, Mob> Mobs => _mobs;
+        public Dictionary<string, MinicComponents> Minics => _minics;
+
+
         public SpawnerService(IStaticDataService staticDataService, IFactoryField factoryField, ICoroutineRunner coroutineRunner)
         {
             _staticDataService = staticDataService;
@@ -49,9 +53,10 @@ namespace CodeBase.Services.SpawnerService
                 var minic = _staticDataService.ForMinic(minicsId[i]).Prefab;
                 var minicGO =  _factoryField.CreateMinic(spawnPoint, minic);
                 var minicComponents = minicGO.GetComponent<MinicComponents>();
+                minicComponents.MinicDeath.Construct(this);
                 var id = Guid.NewGuid().ToString();
                 minicComponents.id = id;
-                _minics.Add(minicComponents.id, minicGO);  
+                _minics.Add(minicComponents.id, minicComponents);  
             }
         }
 
@@ -69,7 +74,7 @@ namespace CodeBase.Services.SpawnerService
                 var id = Guid.NewGuid().ToString();
                 mob.Id = id;
                 mob.EnemyDeath.Construct(this);
-                _mobs.Add(id, mobGO);
+                _mobs.Add(id, mob);
             }
 
             _coroutineRunner.StartCoroutine(SpawnWaveCoroutine());
@@ -78,10 +83,10 @@ namespace CodeBase.Services.SpawnerService
      
         IEnumerator SpawnWaveCoroutine() {
             
-            var spawnWaveCoroutine = new WaitForSeconds(1.5f);
+            var spawnWaveCoroutine = new WaitForSeconds(1.5f / 3);
             
             foreach (var mob in _mobs.Values) {
-                mob.SetActive(true);
+                mob.gameObject.SetActive(true);
                 yield return spawnWaveCoroutine;
             }
 

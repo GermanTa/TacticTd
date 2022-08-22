@@ -37,6 +37,7 @@ namespace CodeBase.infrastructure.States {
             ));
 
             _services.RegisterSingle(new DistanceControlService(_services.Single<ISpawnerService>(), _stateMachine.CoroutineRunner));
+            _services.RegisterSingle(new BattleService(_services.Single<ISpawnerService>(), _stateMachine.CoroutineRunner));
 
 
         }

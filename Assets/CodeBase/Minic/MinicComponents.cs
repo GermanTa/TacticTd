@@ -11,4 +11,5 @@ public class MinicComponents : MonoBehaviour
     public MinicHealth minicHealth;
     public MinicAttack minicAttack;
     public ActorUi ActorUi;
+    public MinicDeath MinicDeath;
 }

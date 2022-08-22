@@ -15,8 +15,7 @@ namespace CodeBase.infrastructure.States
         private readonly IStaticDataService _staticDataService;
         private readonly ISpawnerService _spawnerService;
         private readonly DistanceControlService _distanceControlService;
-
-
+        private readonly BattleService _battleManagerService;
         private string nameLevel;
         MinicId[] minicsId = new MinicId[] { MinicId.ShieldMaidenMary, MinicId.Countess, MinicId.BountyHunter, MinicId.BoneArcher};
 
@@ -25,7 +24,8 @@ namespace CodeBase.infrastructure.States
             IFactoryField factoryField, 
             IStaticDataService staticDataService,
             ISpawnerService spawnerService,
-            DistanceControlService distanceControlService)
+            DistanceControlService distanceControlService,
+            BattleService battleManagerService)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -33,6 +33,7 @@ namespace CodeBase.infrastructure.States
             _staticDataService = staticDataService;
             _spawnerService = spawnerService;
             _distanceControlService = distanceControlService;
+            _battleManagerService = battleManagerService;
         }
         
         public void Enter(string payload)
@@ -56,6 +57,7 @@ namespace CodeBase.infrastructure.States
             _spawnerService.SpawnWave(LevelWaveId.OneWave, spawnPoint);
             _spawnerService.SpawnSelectedMinics(spawnPointsMinic, minicsId);
             _distanceControlService.DistanceControllerUpdate();
+            _battleManagerService.BattleManagerUpdate();
 
             if (nameLevel == "Main")
             {

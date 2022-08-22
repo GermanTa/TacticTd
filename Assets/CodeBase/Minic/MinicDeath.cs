@@ -15,6 +15,11 @@ public class MinicDeath : MonoBehaviour
        
     }
 
+    public void Construct(ISpawnerService spawnerService)
+    {
+        this.spawnerService = spawnerService;
+    }
+
     private void HealthChanged()
     {
         
@@ -27,6 +32,7 @@ public class MinicDeath : MonoBehaviour
 
     private void Death()
     {
+        Debug.Log(minicComponents.id);
         spawnerService.DeleteMinicFromList(minicComponents.id);
         minicComponents.minicHealth.HealthChanged -= HealthChanged;
         Destroy(gameObject);
