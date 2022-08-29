@@ -8,7 +8,7 @@ using UnityEngine;
 namespace CodeBase.infrastructure.Services {
     public class DistanceControlService : IService {
         private List<Mob> _mobs;
-        private List<MinicComponents> _minics;
+        private List<UnitComponents> _minics;
         ICoroutineRunner _coroutineRunner;
         ISpawnerService _spawnerService;
 
