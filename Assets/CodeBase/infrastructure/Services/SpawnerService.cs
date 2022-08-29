@@ -52,7 +52,7 @@ namespace CodeBase.Services.SpawnerService
                 var minic = _staticDataService.ForMinic(minicsId[i]).Prefab;
                 var minicGO =  _factoryField.CreateMinic(spawnPoint, minic);
                 var minicComponents = minicGO.GetComponent<MinicComponents>();
-                minicComponents.Construct(this);
+                minicComponents.Construct(this, _factoryField);
                 var id = Guid.NewGuid().ToString();
                 minicComponents.id = id;
                 _minics.Add(minicComponents.id, minicComponents);  
@@ -92,7 +92,7 @@ namespace CodeBase.Services.SpawnerService
         }
 
         public void SpawnProjectile(Mob target, Vector3 origin, float damage) {
-            _factoryField.CreateProjectile
+            //_factoryField.CreateProjectile
         }
     }
 

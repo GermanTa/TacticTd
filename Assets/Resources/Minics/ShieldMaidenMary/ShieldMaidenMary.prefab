@@ -781,6 +781,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 3554062040770226561}
+  _minic: {fileID: 0}
+  _effectiveDistance: 1
   AttackCooldown: 1
 --- !u!114 &4914596461363253411
 MonoBehaviour:
@@ -800,6 +802,7 @@ MonoBehaviour:
   minicAttack: {fileID: -8884055936338715415}
   ActorUi: {fileID: 7792000980095673309}
   MinicDeath: {fileID: -4972688585124666200}
+  isRange: 0
 --- !u!114 &7792000980095673309
 MonoBehaviour:
   m_ObjectHideFlags: 0

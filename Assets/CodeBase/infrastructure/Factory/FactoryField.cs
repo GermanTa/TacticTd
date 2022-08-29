@@ -51,6 +51,7 @@ namespace CodeBase.infrastructure.Factory {
             minicComponents.minicHealth.MaxHp = 200;
             minicComponents.minicHealth.CurrentHp = minicComponents.minicHealth.MaxHp;
             minicComponents.ActorUi.Construct(minicComponents.minicHealth);
+            
             return minic;
         }
 

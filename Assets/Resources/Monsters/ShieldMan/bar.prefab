@@ -1488,9 +1488,9 @@ GameObject:
   - component: {fileID: 8323785890224675665}
   - component: {fileID: 3007106566526234713}
   - component: {fileID: 4864889216270922257}
-  - component: {fileID: -3432380205774290105}
   - component: {fileID: -5297442609701743054}
   - component: {fileID: 7477786106648697052}
+  - component: {fileID: 1734837886603093500}
   m_Layer: 6
   m_Name: bar
   m_TagString: Untagged
@@ -1578,7 +1578,7 @@ MonoBehaviour:
   Id: 
   MovingToWaypoints: {fileID: 8323785890224675665}
   Attack: {fileID: 4864889216270922257}
-  MobHealth: {fileID: -3432380205774290105}
+  MobHealth: {fileID: 1734837886603093500}
   EnemyDeath: {fileID: -5297442609701743054}
   ActorUi: {fileID: 7477786106648697052}
 --- !u!114 &4864889216270922257
@@ -1594,21 +1594,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 6849001557508841418}
+  _effectiveDistance: 1
   AttackCooldown: 1
---- !u!114 &-3432380205774290105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7220243519024001157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04064bde9ff665947b9c6594192a752b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mob: {fileID: 3007106566526234713}
-  Animator: {fileID: 6849001557508841418}
 --- !u!114 &-5297442609701743054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1622,7 +1609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAnimator: {fileID: 6849001557508841418}
-  mobHealth: {fileID: -3432380205774290105}
+  mobHealth: {fileID: 1734837886603093500}
 --- !u!114 &7477786106648697052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1636,6 +1623,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HpBar: {fileID: 7558416412244407888}
+--- !u!114 &1734837886603093500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7220243519024001157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04064bde9ff665947b9c6594192a752b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mob: {fileID: 3007106566526234713}
+  Animator: {fileID: 6849001557508841418}
 --- !u!1 &7491487791899743198
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,12 +2,14 @@ using CodeBase.Minic;
 using System.Collections;
 using CodeBase.Services.SpawnerService;
 using UnityEngine;
+using CodeBase.infrastructure.Factory;
 
 [RequireComponent(typeof(MinicAnimator))]
 public class MinicAttack : MonoBehaviour
 {
     public MinicAnimator Animator;
-    public float _effectiveDistance = 1f;
+    public MinicComponents _minic;
+    public float _effectiveDistance;
     public float AttackCooldown = 1f;
     private int _damage = 10;
 
@@ -17,6 +19,7 @@ public class MinicAttack : MonoBehaviour
     private Coroutine attackCoroutineLink;
     private bool _attackInProgress;
     private SpawnerService _spawnerService;
+    private IFactoryField _factoryField;
 
     public float EffectiveDistance => _effectiveDistance;
 
@@ -34,6 +37,12 @@ public class MinicAttack : MonoBehaviour
         }
     }
 
+    public void Construct(SpawnerService spawnerService, IFactoryField factoryField)
+    {
+        _spawnerService = spawnerService;
+        _factoryField = factoryField;
+    }
+
     private void OnTargetDeath(string id) {
         _target.MobHealth.DeathEvent -= OnTargetDeath;
         _currentState = AttackState.EndAttack;
@@ -44,7 +53,9 @@ public class MinicAttack : MonoBehaviour
 
     private void Start()
     {
+        _minic = GetComponent<MinicComponents>();
         attackCoroutineLink = StartCoroutine(AttackCoroutine());
+        
     }
 
     public void OnDeath()
@@ -63,6 +74,7 @@ public class MinicAttack : MonoBehaviour
         {
             if (_currentState == AttackState.StartAttack && !_attackInProgress) {
                 _attackInProgress = true;
+               
                 StartAttack();
             }
 
@@ -82,7 +94,16 @@ public class MinicAttack : MonoBehaviour
 
     private void StartAttack()
     {
-        Animator.PlayAttack();
+       
+        if (_minic.isRange == true)
+        {
+           
+            Animator.PlayRangeAttack();
+           
+        } else
+        {
+            Animator.PlayAttack();
+        }   
     }
 
     public void SetState(AttackState state)
@@ -90,7 +111,5 @@ public class MinicAttack : MonoBehaviour
         _currentState = state;
     }
 
-    public void Construct(SpawnerService spawnerService) {
-        _spawnerService = spawnerService;
-    }
+   
 }
