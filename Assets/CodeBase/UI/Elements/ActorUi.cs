@@ -1,23 +1,21 @@
 ﻿using CodeBase.infrastructure.Logic;
+using CodeBase.Minic;
 using UnityEngine;
 
-namespace CodeBase.UI.Elements
-{
-  public class ActorUi : MonoBehaviour
-  {
-    public HpBar HpBar;
-    private IHealth _helth;
-    private void OnDestroy() => _helth.HealthChanged -= UpdateHpBar;
-    public void Construct(IHealth health)
-    {
-      _helth = health;
+namespace CodeBase.UI.Elements {
+    public class ActorUi : UnitComponent {
+        public HpBar HpBar;
+        private UnitHealth _health;
+        private void OnDestroy() => _health.HealthChanged -= UpdateHpBar;
 
-      _helth.HealthChanged += UpdateHpBar;
-    }
+        public void InjectDependencies(UnitBase unitComponents, UnitHealth health) {
+            InjectDependencies(unitComponents);
+            _health = health;
+            _health.HealthChanged += UpdateHpBar;
+        }
 
-    private void UpdateHpBar()
-    {
-      HpBar.SetValue(_helth.CurrentHp, _helth.MaxHp);
+        private void UpdateHpBar() {
+            HpBar.SetValue(_health.CurrentHp, _health.MaxHp);
+        }
     }
-  }
 }

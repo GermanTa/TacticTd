@@ -1,16 +1,23 @@
 using CodeBase.Enemy;
-using CodeBase.Mobs;
-using CodeBase.UI.Elements;
-using UnityEngine;
+using CodeBase.Services.SpawnerService;
 
-public class Mob : MonoBehaviour
+
+// Есть Mob, есть Minic, у них много общего.
+// Выделяем у них общий класс - UnitBase
+// У компонентов тоже выделяем общий класс, в котором описываем их связь с Unit-ом.
+// BattleService - обращается с мобами и миниками как с UnitBase
+// 
+
+
+
+public class Mob : UnitBase
 {
     public string Id;
     public MovingToWaypoints MovingToWaypoints;
-    public EnemyAttack Attack;
-    public MobHealth MobHealth;
-    public EnemyDeath EnemyDeath;
-    public ActorUi ActorUi;
+    public override void Construct(SpawnerService spawnerService) {
+        base.Construct(spawnerService);
+        MovingToWaypoints.InjectDependencies(this, unitAnimator);
+    }
 }
 
 public enum AttackType

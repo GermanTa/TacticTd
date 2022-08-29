@@ -1,8 +1,10 @@
 ﻿using CodeBase.infrastructure.AssetsManager;
 using CodeBase.infrastructure.Services.MapData;
 using CodeBase.Minic;
+using CodeBase.Services.SpawnerService;
 using CodeBase.StaticData;
 using GameFieldMono;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -13,6 +15,7 @@ namespace CodeBase.infrastructure.Factory {
         private GameObject _fieldControllerPrefab;
         private GameObject _spawnPoint;
         private WayPoint[] _waypoints;
+        private SpawnerService _spawnerService;
 
         public WayPoint[] Waypoints => _waypoints;
 
@@ -23,9 +26,14 @@ namespace CodeBase.infrastructure.Factory {
         public FactoryField(
             IStaticDataService staticDataService,
             IAssets assetsProvider,
-            IMapDataService mapData) {
+            IMapDataService mapData
+            ) {
             _staticDataService = staticDataService;
             _assetsProvider = assetsProvider;
+        }
+
+        public void InjectDependencies(SpawnerService spawnerService) {
+            _spawnerService = spawnerService;
         }
 
         public void CreateGameField(GameObject prefab) {
@@ -38,19 +46,20 @@ namespace CodeBase.infrastructure.Factory {
             var secondWayPoint = _waypoints[1].transform.position;
             mobGO.transform.LookAt(secondWayPoint);
             Mob mob = mobGO.GetComponent<Mob>();
-            mob.MobHealth.MaxHp = 50;
-            mob.MobHealth.CurrentHp = mob.MobHealth.MaxHp;
-            mob.ActorUi.Construct(mob.MobHealth);
-            mob.MovingToWaypoints.Construct(_waypoints);
+            
+            mob.unitHealth.Init(50);
+            mob.Construct(_spawnerService);
+            
             return mobGO;
         }
 
         public GameObject CreateMinic(SpawnPointMinic spawnPoint, GameObject prefab) {
             var minic = Object.Instantiate(prefab, spawnPoint.transform.position, Quaternion.Euler(0f, 90f, 0f));
-            MinicComponents minicComponents = minic.GetComponent<MinicComponents>();
-            minicComponents.minicHealth.MaxHp = 200;
-            minicComponents.minicHealth.CurrentHp = minicComponents.minicHealth.MaxHp;
-            minicComponents.ActorUi.Construct(minicComponents.minicHealth);
+            UnitComponents unitComponents = minic.GetComponent<UnitComponents>();
+            
+            unitComponents.unitHealth.Init(200);
+            unitComponents.Construct(_spawnerService);
+            
             return minic;
         }
 

@@ -1,27 +1,30 @@
 using CodeBase.Enemy;
 using System.Collections.Generic;
+using CodeBase.Minic;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyAnimator))]
-public class MovingToWaypoints : MonoBehaviour {
+public class MovingToWaypoints : UnitComponent {
     ISpawnerService _spawnerService;
     private WayPoint[] _waypoints;
     List<GameObject> _listMinicStaticData;
-    public EnemyAnimator Animator;
+    public UnitAnimator Animator;
 
     private MovingState _currentState;
     public MovingState CurrentState => _currentState;
-
 
     public string id;
     private int currentWayPoint = 0;
     private float speed = 3.0f;
     private float accuracy = 0.3f;
     private float rotationSpeed = 15f;
-    
 
+    public void InjectDependencies(UnitBase unitBase, UnitAnimator unitAnimator) {
+        Animator = unitAnimator;
+        InjectDependencies(unitBase);
+    }
 
-    public void Construct(WayPoint[] waypoints) {
+    public void SetWaypoints(WayPoint[] waypoints) {
         _waypoints = waypoints;
         if (_waypoints.Length == 0) {
             Debug.LogError("ERR: _waypoints.Length == 0");
