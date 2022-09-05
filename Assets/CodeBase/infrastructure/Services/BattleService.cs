@@ -46,7 +46,7 @@ public class BattleService : IService {
                 for (int j = 0; j < _minics.Count; j++) {
                     UnitComponents unit = _minics[j];
                     if ((mob.transform.position - unit.transform.position).magnitude <= mob.unitAttack.EffectiveDistance) {
-                        _minicAttacked[unit.id] = mob.Id;
+                        _minicAttacked[unit.id] = mob.id;
                         mob.unitAttack.Target = _minics[j].unitHealth;
                         mob.unitAttack.SetState(AttackState.StartAttack);
                         break;
@@ -56,21 +56,21 @@ public class BattleService : IService {
                 }
             }
 
-            for (int k = 0; k < _minics.Count; k++) {
-                UnitComponents unit = _minics[k];
-                for (int x = 0; x < _mobs.Count; x++) {
-                    Mob mob = _mobs[x];
-                    if ((unit.transform.position - mob.transform.position).magnitude <=
-                        unit.unitAttack.EffectiveDistance) {
-                        _mobAttacked[mob.Id] = unit.id;
-                        unit.unitAttack.Target = mob.unitHealth;
-                        unit.unitAttack.SetState(AttackState.StartAttack);
-                        break;
-                    } else {
-                        unit.unitAttack.SetState(AttackState.EndAttack);
-                    }
-                }
-            }
+            //for (int k = 0; k < _minics.Count; k++) {
+            //    UnitComponents unit = _minics[k];
+            //    for (int x = 0; x < _mobs.Count; x++) {
+            //        Mob mob = _mobs[x];
+            //        if ((unit.transform.position - mob.transform.position).magnitude <=
+            //            unit.unitAttack.EffectiveDistance) {
+            //            _mobAttacked[mob.id] = unit.id;
+            //            unit.unitAttack.Target = mob.unitHealth;
+            //            unit.unitAttack.SetState(AttackState.StartAttack);
+            //            break;
+            //        } else {
+            //            unit.unitAttack.SetState(AttackState.EndAttack);
+            //        }
+            //    }
+            //}
 
             yield return null;
         }

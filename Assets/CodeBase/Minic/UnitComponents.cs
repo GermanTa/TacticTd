@@ -5,7 +5,8 @@ public class UnitComponents : UnitBase
 {
     public ActorUi ActorUi;
 
-    public override void Construct(SpawnerService spawnerService) {
+    public override void Construct(SpawnerService spawnerService)
+    {
         base.Construct(spawnerService);
     }
 }

@@ -39,6 +39,7 @@ namespace CodeBase.Minic {
         
         private void Death()
         {
+            
             _animator.PlayDeath();
             _unitComponents.unitHealth.HealthChanged -= HealthChanged;
             DeathEvent?.Invoke(_unitComponents.id);        

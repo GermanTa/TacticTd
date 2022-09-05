@@ -48,17 +48,16 @@ namespace CodeBase.infrastructure.Factory {
             Mob mob = mobGO.GetComponent<Mob>();
             
             mob.unitHealth.Init(50);
-            mob.Construct(_spawnerService);
+
             
             return mobGO;
         }
 
         public GameObject CreateMinic(SpawnPointMinic spawnPoint, GameObject prefab) {
             var minic = Object.Instantiate(prefab, spawnPoint.transform.position, Quaternion.Euler(0f, 90f, 0f));
-            MinicComponents minicComponents = minic.GetComponent<MinicComponents>();
-            minicComponents.minicHealth.MaxHp = 200;
-            minicComponents.minicHealth.CurrentHp = minicComponents.minicHealth.MaxHp;
-            minicComponents.ActorUi.Construct(minicComponents.minicHealth);
+            UnitBase minicComponents = minic.GetComponent<UnitBase>();
+            //minicComponents.unitHealth.Init(200);
+            //minicComponents.ActorUi.Construct(minicComponents.minicHealth);
             
             return minic;
         }

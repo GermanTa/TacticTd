@@ -2,7 +2,7 @@ using CodeBase.Minic;
 using System.Collections;
 using CodeBase.Services.SpawnerService;
 using UnityEngine;
-using CodeBase.infrastructure.Factory;
+
 
 [RequireComponent(typeof(UnitAnimator))]
 public class UnitAttack : UnitComponent
@@ -30,6 +30,7 @@ public class UnitAttack : UnitComponent
 
     public UnitHealth Target
     {
+        get { return _targetUnitHealth; }
         set {
             if (_targetUnitHealth != null) {
                 _targetUnitHealth.DeathEvent -= OnTargetUnitHealthDeath;
@@ -52,7 +53,7 @@ public class UnitAttack : UnitComponent
 
     private void Start()
     {
-        _minic = GetComponent<MinicComponents>();
+      
         attackCoroutineLink = StartCoroutine(AttackCoroutine());
         
     }
@@ -69,7 +70,9 @@ public class UnitAttack : UnitComponent
 
         while (true)
         {
+           
             if (_currentState == AttackState.StartAttack && !_attackInProgress) {
+                
                 _attackInProgress = true;
                
                 StartAttack();
@@ -91,11 +94,13 @@ public class UnitAttack : UnitComponent
 
     private void StartAttack()
     {
+       
         _animator.PlayAttack();
     }
 
     public void SetState(AttackState state)
     {
+       
         _currentState = state;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace CodeBase.Mobs {
     public class MobHealth : MonoBehaviour, IHealth {
 
-        public Mob mob;
+        public UnitComponents mob;
         public EnemyAnimator Animator;
         public event Action HealthChanged;
         public event Action<string> DeathEvent;
@@ -14,7 +14,7 @@ namespace CodeBase.Mobs {
 
         public void TakeDamage(int damage) {
             if (CurrentHp <= 0) {
-                DeathEvent?.Invoke(mob.Id);
+                DeathEvent?.Invoke(mob.id);
             }
 
             CurrentHp -= damage;

@@ -99,7 +99,7 @@ namespace CodeBase.Services.SpawnerService
                 mob.MovingToWaypoints.SetWaypoints(_factoryField.Waypoints);
                 mobGO.SetActive(false);
                 var id = Guid.NewGuid().ToString();
-                mob.Id = id;
+                mob.id = id;
                 mob.Construct(this);
                 _mobs.Add(id, mob);
                 _units[id] = mob;

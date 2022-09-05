@@ -963,11 +963,10 @@ GameObject:
   - component: {fileID: 7074723610562812422}
   - component: {fileID: 540554751298706849}
   - component: {fileID: -4459685601824971808}
-  - component: {fileID: 1505955067260439863}
-  - component: {fileID: -9124619856690266943}
   - component: {fileID: 6015609075952838694}
   - component: {fileID: 4449847285402378479}
-  - component: {fileID: -240057561521218188}
+  - component: {fileID: 8882438785920994006}
+  - component: {fileID: 5150583758835079566}
   m_Layer: 0
   m_Name: bow-bone
   m_TagString: Untagged
@@ -1083,41 +1082,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 540554751298706849}
---- !u!114 &1505955067260439863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7184838786403036868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a26d22e655f779141b82d8d50661e906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 
-  minicAnimator: {fileID: 540554751298706849}
-  minicHealth: {fileID: -4459685601824971808}
-  minicAttack: {fileID: -9124619856690266943}
-  ActorUi: {fileID: 6015609075952838694}
-  MinicDeath: {fileID: -240057561521218188}
-  isRange: 1
---- !u!114 &-9124619856690266943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7184838786403036868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 574ab003746160d42ae67d25579d0f47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Animator: {fileID: 540554751298706849}
-  _minic: {fileID: 1505955067260439863}
-  _effectiveDistance: 22
-  AttackCooldown: 1
 --- !u!114 &6015609075952838694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1143,7 +1107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34dd45f4a8015fb41a7ab4e690f171a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-240057561521218188
+--- !u!114 &8882438785920994006
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1152,10 +1116,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 7184838786403036868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eebf784fce64d6745929ab36310c4083, type: 3}
+  m_Script: {fileID: 11500000, guid: a26d22e655f779141b82d8d50661e906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minicHealth: {fileID: -4459685601824971808}
+  id: 
+  unitHealth: {fileID: -4459685601824971808}
+  unitAttack: {fileID: 5150583758835079566}
+  unitAnimator: {fileID: 540554751298706849}
+  ActorUi: {fileID: 6015609075952838694}
+  ActorUi: {fileID: 6015609075952838694}
+--- !u!114 &5150583758835079566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7184838786403036868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 574ab003746160d42ae67d25579d0f47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 540554751298706849}
+  _effectiveDistance: 1
+  AttackCooldown: 1
 --- !u!1 &7184838786411131404
 GameObject:
   m_ObjectHideFlags: 0

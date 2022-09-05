@@ -12,7 +12,7 @@ using CodeBase.Services.SpawnerService;
 
 public class Mob : UnitBase
 {
-    public string Id;
+    //public string Id;
     public MovingToWaypoints MovingToWaypoints;
     public override void Construct(SpawnerService spawnerService) {
         base.Construct(spawnerService);

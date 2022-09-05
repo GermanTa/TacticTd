@@ -636,9 +636,8 @@ GameObject:
   - component: {fileID: -4992848736904837622}
   - component: {fileID: -1624823547685374203}
   - component: {fileID: -1405891466900361716}
-  - component: {fileID: -7480544362959609542}
   - component: {fileID: 4856970431204063748}
-  - component: {fileID: 816525349521392743}
+  - component: {fileID: 1809189248002707535}
   m_Layer: 0
   m_Name: rog
   m_TagString: Untagged
@@ -766,26 +765,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 574ab003746160d42ae67d25579d0f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Animator: {fileID: -4992848736904837622}
+  _animator: {fileID: -4992848736904837622}
+  _effectiveDistance: 1
   AttackCooldown: 1
---- !u!114 &-7480544362959609542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000012310824723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a26d22e655f779141b82d8d50661e906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 
-  minicAnimator: {fileID: -4992848736904837622}
-  minicHealth: {fileID: -1624823547685374203}
-  minicAttack: {fileID: -1405891466900361716}
-  ActorUi: {fileID: 4856970431204063748}
-  MinicDeath: {fileID: 816525349521392743}
 --- !u!114 &4856970431204063748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -799,7 +781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HpBar: {fileID: 8419888071451905719}
---- !u!114 &816525349521392743
+--- !u!114 &1809189248002707535
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -808,10 +790,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012310824723}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eebf784fce64d6745929ab36310c4083, type: 3}
+  m_Script: {fileID: 11500000, guid: a26d22e655f779141b82d8d50661e906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minicHealth: {fileID: -1624823547685374203}
+  id: 
+  unitHealth: {fileID: -1624823547685374203}
+  unitAttack: {fileID: -1405891466900361716}
+  unitAnimator: {fileID: -4992848736904837622}
+  ActorUi: {fileID: 4856970431204063748}
+  ActorUi: {fileID: 4856970431204063748}
 --- !u!1 &1000012317547483
 GameObject:
   m_ObjectHideFlags: 0
