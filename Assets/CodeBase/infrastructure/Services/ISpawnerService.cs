@@ -9,9 +9,9 @@ public interface ISpawnerService : IService
     public event Action<string> ChangedListMobs;
     public event Action<string> ChangedListMinics;
     public List<Mob> GetAllMobs();
-    public List<UnitComponents> GetAllMinics();
+    public List<MinicUnit> GetAllMinics();
     public void SpawnWave(LevelWaveId waveId, SpawnPoint spawnPoint);
     public void SpawnSelectedMinics(SpawnPointMinic[] spawnPoinst, MinicId[] minicsId);
     public Dictionary<string, Mob> Mobs { get; }
-    public Dictionary<string, UnitComponents> Minics { get; } 
+    public Dictionary<string, MinicUnit> Minics { get; } 
 }

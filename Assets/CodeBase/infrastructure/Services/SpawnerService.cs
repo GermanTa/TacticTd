@@ -17,7 +17,7 @@ namespace CodeBase.Services.SpawnerService
         private LevelStaticData _wave;
 
         private Dictionary<string, Mob> _mobs = new Dictionary<string, Mob>();
-        private Dictionary<string, UnitComponents> _minics = new Dictionary<string, UnitComponents>();
+        private Dictionary<string, MinicUnit> _minics = new Dictionary<string, MinicUnit>();
         
         private Dictionary<string, UnitBase> _units = new Dictionary<string, UnitBase>();
         
@@ -26,10 +26,10 @@ namespace CodeBase.Services.SpawnerService
         public event Action<string> ChangedListMobs;
         public event Action<string> ChangedListMinics;
         public event Action<string> ChangedUnitsListEvent;
-        public List<UnitComponents> GetAllMinics() => _minics.Values.ToList();
+        public List<MinicUnit> GetAllMinics() => _minics.Values.ToList();
 
         public Dictionary<string, Mob> Mobs => _mobs;
-        public Dictionary<string, UnitComponents> Minics => _minics;
+        public Dictionary<string, MinicUnit> Minics => _minics;
 
         public SpawnerService(IStaticDataService staticDataService, IFactoryField factoryField, ICoroutineRunner coroutineRunner)
         {
@@ -55,7 +55,7 @@ namespace CodeBase.Services.SpawnerService
                 var spawnPoint = spawnPoinst[i];
                 var minic = _staticDataService.ForMinic(minicsId[i]).Prefab;
                 var minicGO =  _factoryField.CreateMinic(spawnPoint, minic);
-                var minicComponents = minicGO.GetComponent<UnitComponents>();
+                var minicComponents = minicGO.GetComponent<MinicUnit>();
                 minicComponents.unitHealth.DeathEvent += OnUnitDeath;
                 minicComponents.Construct(this);
                 var id = Guid.NewGuid().ToString();

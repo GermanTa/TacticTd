@@ -17,7 +17,7 @@ using Unity.VisualScripting;
 
 public class BattleService : IService {
     private List<Mob> _mobs;
-    private List<UnitComponents> _minics;
+    private List<MinicUnit> _minics;
     
    // private List<UnitBase> _units;
     ICoroutineRunner _coroutineRunner;
@@ -44,9 +44,9 @@ public class BattleService : IService {
             for (int i = 0; i < _mobs.Count; i++) {
                 Mob mob = _mobs[i];
                 for (int j = 0; j < _minics.Count; j++) {
-                    UnitComponents unit = _minics[j];
-                    if ((mob.transform.position - unit.transform.position).magnitude <= mob.unitAttack.EffectiveDistance) {
-                        _minicAttacked[unit.id] = mob.id;
+                    MinicUnit minicUnit = _minics[j];
+                    if ((mob.transform.position - minicUnit.transform.position).magnitude <= mob.unitAttack.EffectiveDistance) {
+                        _minicAttacked[minicUnit.id] = mob.id;
                         mob.unitAttack.Target = _minics[j].unitHealth;
                         mob.unitAttack.SetState(AttackState.StartAttack);
                         break;

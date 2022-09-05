@@ -5,7 +5,7 @@ using UnityEngine;
 namespace CodeBase.Mobs {
     public class MobHealth : MonoBehaviour, IHealth {
 
-        public UnitComponents mob;
+        public MinicUnit mob;
         public EnemyAnimator Animator;
         public event Action HealthChanged;
         public event Action<string> DeathEvent;

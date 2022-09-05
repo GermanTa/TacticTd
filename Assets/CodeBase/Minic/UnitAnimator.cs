@@ -4,14 +4,14 @@ namespace CodeBase.Minic
 {
   public class UnitAnimator : MonoBehaviour
   {
-    private static readonly int Attack = Animator.StringToHash("Attack_1");
+    private static readonly int Attack = Animator.StringToHash("Attack");
     private static readonly int RangeAttack = Animator.StringToHash("RangeAttack");
     private static readonly int Hit = Animator.StringToHash("Hit");
     private static readonly int Die = Animator.StringToHash("Die");
     private static readonly int Idle = Animator.StringToHash("Idle");
-    private static readonly int AttackBool = Animator.StringToHash("Attack_1");
+    //private static readonly int AttackBool = Animator.StringToHash("Attack_1");
     private static readonly int IsMoving = Animator.StringToHash("IsMoving");
-    private static readonly int Speed = Animator.StringToHash("Speed");
+    //private static readonly int Speed = Animator.StringToHash("Speed");
 
     private Animator _animator;
 
